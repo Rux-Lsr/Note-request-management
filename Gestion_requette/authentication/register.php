@@ -24,42 +24,42 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">First name</label>
+                                                        <input class="form-control" id="inputUserName" type="text" placeholder="Entrez votre nom d'utilisateur" required/>
+                                                        <label for="inputUserName">Nom d'utilisateur</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
-                                                        <label for="inputLastName">Last name</label>
+                                                        <input class="form-control" id="inputMatricule" type="text" placeholder="Entrez votre matricule" required/>
+                                                        <label for="inputMatricule">Matricule</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" required/>
+                                                <label for="inputEmail">Adresse E-mail</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-                                                        <label for="inputPassword">Password</label>
+                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" required/>
+                                                        <label for="inputPassword">Mot de passe</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirmer me mot de passe" required/>
                                                         <label for="inputPasswordConfirm">Confirm Password</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.php">Create Account</a></div>
+                                                <div class="d-grid"><button name="submit_button" type="submit" class="btn btn-primary btn-block" href="login.php">Creer le compte</button></div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.php">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="login.php">Vous avez un compte? Se connecter</a></div>
                                     </div>
                                 </div>
                             </div>
