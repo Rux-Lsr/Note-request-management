@@ -37,11 +37,6 @@
         </script>
     </head>
     <body class="bg-light">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">Etudiant</a>
-           
-        </nav>
         <?php 
             if(isset($_POST["submit_button"])){
                 
@@ -57,8 +52,7 @@
 
                 }
                     
-            }else
-            echo "lol";
+            }
         ?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
@@ -105,8 +99,13 @@
                                             </div>
                                             <select id="mon-select" class="selectpicker" data-live-search="true" name="filiere">
                                                 <option value="1">ICT4D</option>
-                                                <!--<option value="option2">Option 2</option>!-->
+                                                <option value="2" disabled>INFO(comming soon)</option>
                                             </select>
+                                            <!-- <select id="mon-select" class="selectpicker" data-live-search="true" name="niveau">
+                                                <option value="1">1</option>
+                                                <option value="2" >2</option>
+                                                <option value="3" >3</option>
+                                            </select> -->
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
                                                     <!-- <button name="submit_button"  id="submitButton" class="btn btn-primary btn-block" href="login.php">Creer le compte</button> -->

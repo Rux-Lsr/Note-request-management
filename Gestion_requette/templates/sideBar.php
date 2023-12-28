@@ -1,3 +1,4 @@
+
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark navbar-fixed" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
@@ -27,7 +28,14 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            Etudiant
+            <?php 
+            if (isset($_SESSION['user'])){
+                echo $_SESSION['user']['nom'];
+                echo "-";
+                echo $_SESSION['user']['matricule_Etudiant'];
+            }else
+                echo "Etudiant, pas de user";
+            ?>
         </div>
     </nav>
 </div>
