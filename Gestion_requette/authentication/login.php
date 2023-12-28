@@ -11,6 +11,12 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
+        <?php 
+            if(isset($_POST["submit"])){
+                
+
+            }
+        ?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -20,13 +26,13 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Connexion</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" required/>
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" required name="mail"/>
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" required/>
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" required name="pswd"/>
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="form-check mb-3">
@@ -35,7 +41,7 @@
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <!-- <a class="small" href="password.php">Forgot Password?</a> -->
-                                                <button class="btn btn-primary" type="submit">Connexion</button>
+                                                <button class="btn btn-primary" name="submit" type="submit">Connexion</button>
                                             </div>
                                         </form>
                                     </div>

@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,8 +12,54 @@
         <title>Register - SB Admin</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script>
+            // Fonction qui vérifie si les deux mots de passe sont identiques
+            function verifierMdp() {
+                // Récupérer les éléments du formulaire
+                var mdp = document.getElementById("inputPassword");
+                var confirm_mdp = document.getElementById("inputPasswordConfirm");
+               
+                // Comparer les valeurs des champs
+                if (mdp.value == confirm_mdp.value) {
+                    // Les mots de passe sont identiques
+                confirm_mdp.style.borderColor = "green";
+                mdp.style.borderColor = "green";
+                
+                document.getElementById("submitButton").disabled = false;
+                } else {
+                    document.getElementById("submitButton").disabled = true;
+                    confirm_mdp.style.borderColor = "red";
+                    mdp.style.borderColor = "red";
+                    
+                }
+            }
+           $('#mon-select').selectpicker();
+        </script>
     </head>
-    <body class="bg-primary">
+    <body class="bg-light">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="#">Etudiant</a>
+           
+        </nav>
+        <?php 
+            if(isset($_POST["submit_button"])){
+                
+                if(!empty($_POST["user_name"]) && !empty($_POST["matricule"]) && !empty($_POST["mail"])&& !empty($_POST["mdp"])){
+                    //require_once "functions_include/connect.php";
+                    include_once "../functions_include/inscription.php";
+                    $nom = htmlspecialchars($_POST['user_name']);
+                    $matricule = htmlspecialchars($_POST['matricule']);
+                    $mail=htmlspecialchars($_POST['mail']);
+                    $mdp=htmlspecialchars($_POST['mdp']);
+
+                    insertInto("etudiant", $nom,$matricule, $mail, $mdp, $_POST["filiere"]);
+
+                }
+                    
+            }else
+            echo "lol";
+        ?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -20,41 +69,49 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputUserName" type="text" placeholder="Entrez votre nom d'utilisateur" required/>
+                                                        <input class="form-control" id="inputUserName" type="text" placeholder="Entrez votre nom d'utilisateur" name="user_name" required/>
                                                         <label for="inputUserName">Nom d'utilisateur</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputMatricule" type="text" placeholder="Entrez votre matricule" required/>
+                                                        <input class="form-control" id="inputMatricule" type="text" placeholder="Entrez votre matricule" name="matricule" required/>
                                                         <label for="inputMatricule">Matricule</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" required/>
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="mail" required/>
                                                 <label for="inputEmail">Adresse E-mail</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" required/>
+                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" name="mdp" required/>
                                                         <label for="inputPassword">Mot de passe</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirmer me mot de passe" required/>
+                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirmer me mot de passe" name="mdp_confirm" oninput="verifierMdp();" required/>
                                                         <label for="inputPasswordConfirm">Confirm Password</label>
+                                                        <div id="msg"></div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <select id="mon-select" class="selectpicker" data-live-search="true" name="filiere">
+                                                <option value="1">ICT4D</option>
+                                                <!--<option value="option2">Option 2</option>!-->
+                                            </select>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button name="submit_button" type="submit" class="btn btn-primary btn-block" href="login.php">Creer le compte</button></div>
+                                                <div class="d-grid">
+                                                    <!-- <button name="submit_button"  id="submitButton" class="btn btn-primary btn-block" href="login.php">Creer le compte</button> -->
+                                                    <button name="submit_button" type="submit" id="submitButton" type="button" class="btn btn-primary">Creer le compte</button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
