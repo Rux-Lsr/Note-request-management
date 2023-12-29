@@ -43,6 +43,7 @@
                     </div>
                     <?php 
                     require_once 'functions_include\connect.php';
+                        $rqs =null;
                          if (isset($_POST["publish"])) {
                             // Téléchargement du fichier
                             $file_name = $_FILES['piece']['name'];
@@ -83,14 +84,12 @@
    
                                 echo "<div class='alert alert-success'>Publication reussie</div>";
                               }
-
-
-                              $sql = "SELECT src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue order by date_de_publication";
-                              $stm = $con->prepare($sql);
-                              $stm->execute();
-
-                              $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
                         }
+                        $sql = "SELECT src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue order by date_de_publication";
+                        $stm = $con->prepare($sql);
+                        $stm->execute();
+
+                        $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                    <div class="container">
                    <h4>Uploader Note</h4>
