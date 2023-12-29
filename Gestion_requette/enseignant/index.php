@@ -1,11 +1,11 @@
 <?php session_start() ;
-    if(!isset($_SESSION['user']))
-        header('Location: error_pages\401.php');
+    if(!isset($_SESSION['user']) || isset($_SESSION['user']['matricule']))
+        header('Location: ..\error_pages\401.php');
 
     require_once 'functions_include/connect.php';
     require_once 'functions_include/those.php';
-    $stm = $con->prepare("SELECT ue.code_UE, r.objet_Requette, e.nom_enseignant, r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette from requette r JOIN ue on ue.id_UE = r.id_UE join enseignant e on e.id_enseignant = r.id_enseignant where r.id_Etudiant = :id_");
-    $stm->execute(array('id_'=>$_SESSION['user']['id_Etudiant']));
+    $stm = $con->prepare("SELECT  r.objet_Requette,  r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette, e.nom, e.matricule_Etudiant from requette r  join etudiant e on e.id_Etudiant = r.id_Etudiant where r.id_enseignant = :id_");
+    $stm->execute(array('id_'=>$_SESSION['user']['id_enseignant']));
 
     $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - Gestion de requette</title>
+        <title>Dashboard ens - Gestion de requette</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -46,10 +46,9 @@
                                     <thead>
                                         <tr> 
                                             <th>N°</th>
-                                            <th>UE</th>
                                             <th>Objet</th>
-                                            <th>Enseignant</th>
-                                            <th>Status</th>
+                                            <th>Matricule</th>
+                                            <th>Nom</th>
                                             <th>Date de soumission</th>
                                             <th>Action</th>
                                         </tr>
@@ -59,14 +58,14 @@
                                         <?php 
                                             $i = 1;
                                             foreach ($rqs as $rq) { 
+                                               
                                         ?>
                                             <form action="" method="get">
                                                 <tr>
                                                     <td><?=$i?></td>
-                                                    <td><?=$rq['code_UE']?></td>
                                                     <td><?=$rq['objet_Requette']?></td>
-                                                    <td><?=$rq['nom_enseignant']?></td>
-                                                    <td><?=getStatusRq($rq['status'], $rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?></td>
+                                                    <td><?=$rq['matricule_Etudiant']?></td>
+                                                    <td><?=$rq['nom']?></td>
                                                     <td><?=$rq['date_soumission']?></td>
                                                     <td><?=actionDependOnStatus($rq['status'], $rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?></td>
                                                 </tr>

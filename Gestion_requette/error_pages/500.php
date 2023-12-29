@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>404 Error - SB Admin</title>
-        <link href="../css/styles.css" rel="stylesheet" />
+        <link href="../etudiant/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -18,12 +18,11 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
-                                    <h1 class="display-1">401</h1>
-                                    <p class="lead">Unauthorized</p>
-                                    <p>Access to this resource is denied.</p>
-                                    <a href="authentication\login.php">
+                                    <h1 class="display-1">500</h1>
+                                    <p class="lead">Internal Server Error</p>
+                                    <a href="../authentication/login.php">
                                         <i class="fas fa-arrow-left me-1"></i>
-                                        Return to login
+                                        Return to safe
                                     </a>
                                 </div>
                             </div>
@@ -36,6 +35,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="../js/scripts.js"></script>
     </body>
 </html>

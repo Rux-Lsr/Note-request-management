@@ -1,8 +1,8 @@
 
 <?php 
     session_start();
-    if(!isset($_SESSION['user']))
-        header('Location: error_pages\401.php');
+    if(!isset($_SESSION['user']['matricule_Etudiant']))
+        header('Location: ..\error_pages\401.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,7 @@
                             $file_parts = explode('.', $file_name);
                             $file_ext = strtolower(end($file_parts));
                         
-                            $upload_dir = 'uploads/';
+                            $upload_dir = '../uploads/';
                             $file_path = $upload_dir . $file_name;
                             $t = 1;
                             // Vérification de l'extension du fichier
