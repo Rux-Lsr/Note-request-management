@@ -67,11 +67,7 @@
                                 <input type="email" class="form-control form-control-lg" id="mail_n" name="mail"  value="<?=$_SESSION['user']['email_Etudiant']?>" placeholder="Veuillez saisir votre E-mail"  required >
                                 <button class="btn btn-primary mt-1" type="submit" name="sb2">Modifier</button>
                             </div>
-                            <div class="form-check">
-                                <label for="mat" class="text-secondary font-weight-bold col-form-label">Matricule</label>
-                                <input type="text" class="form-control form-control-lg" id="mat" name="matricule"  value="<?=$_SESSION['user']['matricule_Etudiant']?>" placeholder="Veuillez saisir votre matricule" pattern="[0-9]{2}[A-Za-z]{1}[0-9]{4}" title="Ex: 21Q2548" required>
-                                <button class="btn btn-primary mt-1" type="submit" name="sb_mat">Modifier</button>
-                            </div>
+                           
                        </form>
                         <hr>
                         <form action="" method="post">

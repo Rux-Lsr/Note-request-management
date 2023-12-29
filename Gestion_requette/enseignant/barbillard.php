@@ -1,7 +1,6 @@
 <?php session_start();
     if(!isset($_SESSION['user']) || isset($_SESSION['user']['matricule']))
     header('Location: ..\error_pages\401.php');
-
    
 ?>
 <!DOCTYPE html>
@@ -35,7 +34,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Consultez vos Notes sur les differentes UE</h1>
+                        <h1 class="mt-4">Consultez et publiez les notes</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">tableau de bord</a></li>
                             <li class="breadcrumb-item active">Barbillard</li>
@@ -44,7 +43,7 @@
                     <?php 
                     require_once 'functions_include\connect.php';
                         $rqs =null;
-                         if (isset($_POST["publish"])) {
+                         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             // Téléchargement du fichier
                             $file_name = $_FILES['piece']['name'];
                             $file_tmp = $_FILES['piece']['tmp_name'];
@@ -85,14 +84,14 @@
                                 echo "<div class='alert alert-success'>Publication reussie</div>";
                               }
                         }
-                        $sql = "SELECT src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue order by date_de_publication";
+                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue order by date_de_publication";
                         $stm = $con->prepare($sql);
                         $stm->execute();
 
                         $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                    <div class="container">
-                   <h4>Uploader Note</h4>
+                   <h4><label for='piece'>Uploader Note</label></h4>
                    <br>
                    <hr>
                         <form action="" method="post" enctype="multipart/form-data">
@@ -104,10 +103,10 @@
                                 <input type="text" class="form-control file-upload-info"  disabled placeholder=" PNG ou JPG, JPEG" id="fileName">
                                 <span class="input-group-append">
                                     <button class="btn btn-primary " id="parcourir">Parcourir...</button>
+                                
+                                    <button class="btn btn-success " id="publish" type="submit">publier</button>
                                 </span>
-                                <span class="input-group-append">
-                                    <button class="btn btn-success " name="publish" type="submit">publier</button>
-                                </span>
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                                 <script>
                                     let browseBtn = document.getElementById("parcourir");
                                     let file = document.querySelector("#fichier");
@@ -121,41 +120,74 @@
                                         document.getElementById("fileName").value = e.target.files[0].name;
                                         console.log("changement d'etat de lentree de fichier");
                                     });
+                                    let publishBtn = document.getElementById("publish");
+                                    publishBtn.addEventListener("click", function(e) {
+                                        e.preventDefault(); // Empêche la soumission normale du formulaire
+                                        let formData = new FormData();
+                                        formData.append("piece", file.files[0]);
+
+                                        $.ajax({
+                                            url: '', // URL du script PHP qui gère l'envoi des données
+                                            type: 'POST',
+                                            data: formData,
+                                            processData: false, // Indique à jQuery de ne pas traiter les données
+                                            contentType: false, // Indique à jQuery de ne pas définir le type de contenu
+                                            success: function(data) {
+                                                location.reload();   
+                                            }
+                                        });
+                                    });
                                 </script>
                                 </div>
                             </div>
                         </form>
                         <hr>
-                        <form action="" method="post">
+                        
                             <div>
                             <?php 
                                 foreach ($rqs as $rq) {
                                     if($rq['id_ue']==$_SESSION['user']["id_enseignant"]){
                                 ?>
 
-                                <h5><?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?>| <button type="button" class="btn btn-danger" id="">Supprimer</button></h5> 
-                                <div class="text-center">
-                                    <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
-                                </div>
+                                <form action="" method="post">
+                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a>  <button type="button" class="btn btn-danger" id="" onclick="confirmDelete()">Supprimer</button></h5> 
+                                    <div class="text-center">
+                                        <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
+                                        <input type="hidden" id='id_' value="<?=$rq['id']?>" readonly>
+                                    </div>
+                                </form>
                             <br>
                             <hr>
                             <br>
                             <?php
                                     }else{
                                         ?>
-                                <h5><?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?>|<button  type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#myModal">Supprimer</button></h5> 
+                                <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a></h5> 
                                 <div class="text-center">
                                     <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
                                 </div>
-
+                                
                             <?php
                                     }
                                 }
                             ?>  
                         </div>
+                        <script>
+                            function confirmDelete(){
+                                    let reponse = confirm("Voulez vous vraiment supprimer ce post?");
+                                    console.log("Reponse: "+reponse);
+                                    
+                                    let xhr = new XMLHttpRequest();
+                                    xhr.open("POST", "functions_include/delete_post.php", true);
+                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                    let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
+                                    xhr.send(params);
+                                    window.location.href = window.location.href;
+                                    
+                            }
+                        </script>
+                               
                         
-        
-                        </form>
                                         
                     </div>
                 </main>
@@ -164,6 +196,7 @@
         </div>
         
     </div>
+    
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
     </body>
