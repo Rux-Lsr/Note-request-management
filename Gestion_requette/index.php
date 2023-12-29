@@ -1,4 +1,11 @@
-<?php session_start() ?>
+<?php session_start() ;
+    require_once 'functions_include/connect.php';
+    require_once 'functions_include/those.php';
+    $stm = $con->prepare("SELECT ue.code_UE, r.objet_Requette, e.nom_enseignant, r.status, r.date_soumission, id_Requette from requette r JOIN ue on ue.id_UE = r.id_UE join enseignant e on e.id_enseignant = r.id_enseignant where r.id_Etudiant = :id_");
+    $stm->execute(array('id_'=>$_SESSION['user']['id_Etudiant']));
+
+    $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,11 +18,12 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
     </head>
     <body class="sb-nav-fixed">
         <?php include_once "templates/fixedNavBar.php";?>
         <div id="layoutSidenav">
-            
+            <!-- ; -->
             <div id="layoutSidenav_content">
             <?php include_once "templates/sideBar.php" ?>
                 <main>
@@ -45,33 +53,40 @@
                                     </thead>
                                     
                                     <tbody>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Ict201</td>
-                                            <td>nom erroné.</td>
-                                            <td>Moyou Brice</td>
-                                            <td>en cours</td>
-                                            <td>2011/04/25</td>
-                                            <td><button class="btn btn-warning">Annuler</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Ict203</td>
-                                            <td>Pas de note de cc.</td>
-                                            <td>Ghislain</td>
-                                            <td>Validé</td>
-                                            <td>2011/05/25</td>
-                                            <td><button class="btn btn-warning" disabled>Annuler</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Ict205</td>
-                                            <td>Pas de note de SN.</td>
-                                            <td>Ghislain</td>
-                                            <td>rejeté</td>
-                                            <td>2011/05/25</td>
-                                            <td><button class="btn btn-danger" ><a href="modif-req.php" style="text-decoration: none; color:black;">Modifier</a></button></td>
-                                        </tr>
+                                        <?php 
+                                            $i = 1;
+                                            foreach ($rqs as $rq) { 
+                                        ?>
+                                            <form action="" method="get">
+                                                <tr>
+                                                    <td><?=$i?></td>
+                                                    <td><?=$rq['code_UE']?></td>
+                                                    <td><?=$rq['objet_Requette']?></td>
+                                                    <td><?=$rq['nom_enseignant']?></td>
+                                                    <td><?=getStatusRq($rq['status'])?></td>
+                                                    <td><?=$rq['date_soumission']?></td>
+                                                    <td><?=actionDependOnStatus($rq['status'], $rq['id_Requette'], $i)?></td>
+                                                </tr>
+                                                <input type="hidden" id='id_' value="<?=$rq['id_Requette']?>">
+                                            </form>  
+                                        <?php
+                                            $i++;
+                                            }
+                                        ?>
+                                       <script>
+                                        function confirmDelete(numeroReq){
+                                                let reponse = confirm("Confirmer la suppresion  de la requette N°"+ numeroReq);
+                                                let xhr = new XMLHttpRequest();
+                                                xhr.open("POST", "functions_include/del.php", true);
+                                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                                let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
+                                                xhr.send(params);
+                                                let st = document.getElementById('alert_box');
+                                                st.value="Votre requette a été annulée avec success";
+                                                st.style.display = "block";
+                                                
+                                        }
+                                        </script>
                                     </tbody>
                                 </table>
                             </div>
