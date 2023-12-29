@@ -24,11 +24,11 @@
     function actionDependOnStatus($st, $id_Requette, $numReq, $objet){
         switch($st){
             case 0 :
-                return "<a class=\"btn btn-danger\" disable href='modif-req.php?id_rq=$id_Requette'>Traiter la requette</a>";
+                return "<a class=\"btn btn-warning\" disable href='modif-req.php?id_rq=$id_Requette'>Traiter la requette</a>";
             case 1 :
-                return "<button class=\"btn btn-success\" type='button'>Traitée</button>";
+                return "<button class=\"btn btn-success\" type='button'>Traitée(validée)</button>";
             case -1:
-                return "<button class=\"btn btn-success\" type='button'>Traitée</button>";
+                return "<button class=\"btn btn-danger\" type='button'>Traitée(rejettée)</button>";
                 // return "<a class=\"btn btn-warning\" disable href='modif-req.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet'>Modifier</a>";
             // case 2:
             //     return "<a class=\"btn btn-primary\" disable href='modif-req.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet'>Modifier</a>";

@@ -4,7 +4,7 @@
 
     require_once 'functions_include/connect.php';
     require_once 'functions_include/those.php';
-    $stm = $con->prepare("SELECT  r.objet_Requette,  r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette, e.nom, e.matricule_Etudiant from requette r  join etudiant e on e.id_Etudiant = r.id_Etudiant where r.id_enseignant = :id_");
+    $stm = $con->prepare("SELECT  r.objet_Requette,  r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette, e.nom, e.matricule_Etudiant from requette r  join etudiant e on e.id_Etudiant = r.id_Etudiant where r.id_enseignant = :id_ order by r.status");
     $stm->execute(array('id_'=>$_SESSION['user']['id_enseignant']));
 
     $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -75,19 +75,7 @@
                                             $i++;
                                             }
                                         ?>
-                                       <script>
-                                        function confirmDelete(numeroReq){
-                                                let reponse = confirm("Confirmer la suppresion  de la requette N°"+ numeroReq);
-                                                console.log("Reponse: "+reponse);
-                                               
-                                                let xhr = new XMLHttpRequest();
-                                                xhr.open("POST", "functions_include/del.php", true);
-                                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                                let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
-                                                xhr.send(params);
-                                               
-                                        }
-                                        </script>
+                                       
                                     </tbody>
                                 </table>
                             </div>
