@@ -70,7 +70,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputMatricule" type="text" placeholder="Entrez votre matricule" name="matricule" required/>
+                                                        <input class="form-control" pattern="[0-9]{2}[A-Za-z]{1}[0-9]{4}" title="Ex: 21Q5896" id="inputMatricule" type="text" placeholder="Entrez votre matricule" name="matricule" required/>
                                                         <label for="inputMatricule">Matricule</label>
                                                     </div>
                                                 </div>
@@ -82,8 +82,9 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" name="mdp" required/>
-                                                        <label for="inputPassword">Mot de passe</label>
+                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre majuscule, une lettre minuscule, et au moins 8 caractères ou plus"
+required/>                                          
+                                                    <label for="inputPassword">Mot de passe</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

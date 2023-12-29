@@ -28,8 +28,8 @@
     <div class="form-check">
         <label for="objet" class="text-secondary font-weight-bold col-form-label">Objet</label>
         <input type="text" class="form-control form-control-lg" id="objet" name="objet" value="" placeholder="Veuillez saisir votre Objet"  required>
-            <div class="invalid-feedback">Veuillez saisir l'Objet de la Requête</div>
-        </div>
+            
+    </div>
     <div class="form-check">
         <label for="libelle" class="text-secondary font-weight-bold col-form-label">Corps</label>
         <textarea class="form-control form-control-lg" id="req" name="libelle" rows="20" placeholder="Corps de la requête" required>

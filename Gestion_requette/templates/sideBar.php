@@ -34,7 +34,7 @@
                 echo "-";
                 echo $_SESSION['user']['matricule_Etudiant'];
             }else
-                echo "Etudiant, pas de user";
+                echo "Etudiant- NON AUTORISE";
             ?>
         </div>
     </nav>

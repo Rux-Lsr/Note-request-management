@@ -33,10 +33,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Edition de requette rejetée</h1>
+                        <h1 class="mt-4">Consultez vos Notes sur les differentes UE</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">tableau de bord</a></li>
-                            <li class="breadcrumb-item active">requettes rejetées</li>
+                            <li class="breadcrumb-item active">Barbillard</li>
                         </ol>
                     </div>
                    <div class="container">
