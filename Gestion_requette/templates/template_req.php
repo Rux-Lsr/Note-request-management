@@ -1,5 +1,5 @@
 <form enctype="multipart/form-data" action=""  method="post">
-<h4>Choix de l'UE</h4><br>
+<h4 id="titleUe">Choix de l'UE</h4><br>
     <div class="form-check d-flex col-md-12">
         <select class="form-select form-control-lg" id="selectlevel"  name="ue" required>
             <option selected disabled value="">UE</option>
@@ -79,6 +79,6 @@
     <br>
     <div class="col-md-12 d-flex">
         <div class="col-md-3"></div>
-        <button type="submit" class="btn btn-primary col-md-6 " name="submit1">Envoyer </button>
+        <button type="submit" class="btn btn-primary col-md-6 " name="submit1">Envoyer</button>
     <div class="col-md-3"></div>  
 </form>                           

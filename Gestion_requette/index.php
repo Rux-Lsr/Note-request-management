@@ -1,7 +1,7 @@
 <?php session_start() ;
     require_once 'functions_include/connect.php';
     require_once 'functions_include/those.php';
-    $stm = $con->prepare("SELECT ue.code_UE, r.objet_Requette, e.nom_enseignant, r.status, r.date_soumission, id_Requette from requette r JOIN ue on ue.id_UE = r.id_UE join enseignant e on e.id_enseignant = r.id_enseignant where r.id_Etudiant = :id_");
+    $stm = $con->prepare("SELECT ue.code_UE, r.objet_Requette, e.nom_enseignant, r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette from requette r JOIN ue on ue.id_UE = r.id_UE join enseignant e on e.id_enseignant = r.id_enseignant where r.id_Etudiant = :id_");
     $stm->execute(array('id_'=>$_SESSION['user']['id_Etudiant']));
 
     $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -65,7 +65,7 @@
                                                     <td><?=$rq['nom_enseignant']?></td>
                                                     <td><?=getStatusRq($rq['status'])?></td>
                                                     <td><?=$rq['date_soumission']?></td>
-                                                    <td><?=actionDependOnStatus($rq['status'], $rq['id_Requette'], $i)?></td>
+                                                    <td><?=actionDependOnStatus($rq['status'], $rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?></td>
                                                 </tr>
                                                 <input type="hidden" id='id_' value="<?=$rq['id_Requette']?>">
                                             </form>  
@@ -81,10 +81,6 @@
                                                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                                                 let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
                                                 xhr.send(params);
-                                                let st = document.getElementById('alert_box');
-                                                st.value="Votre requette a été annulée avec success";
-                                                st.style.display = "block";
-                                                
                                         }
                                         </script>
                                     </tbody>

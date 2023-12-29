@@ -21,14 +21,14 @@
                 return "<button class='btn btn-danger'>Rejettée</button>";
         }
     }
-    function actionDependOnStatus($st, $id_Requette, $numReq){
+    function actionDependOnStatus($st, $id_Requette, $numReq, $id_UE, $objet){
         switch($st){
             case 0 :
                 return "<button class=\"btn btn-danger\" onclick='confirmDelete($numReq)'>Annuler</button>";
             case 1 :
                 return "<button class=\"btn btn-success\">OK</button>";
             case -1:
-                return "<button class=\"btn btn-warning\" disable href='modif-req.php?id_rq=$id_Requette'>Modifier</button>";
+                return "<a class=\"btn btn-warning\" disable href='modif-req.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet'>Modifier</a>";
         }
     }
 ?>
