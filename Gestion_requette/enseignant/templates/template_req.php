@@ -32,7 +32,6 @@
         </span>
     </div>
 
-
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -46,10 +45,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary" name="rejetter">Sauvegarder</button>
+                <button type="submit" class="btn btn-danger" name="rejetter">Rejetter</button>
             </div>
             </div>
         </div>
-        </div>
+    </div>
 </form>                           
 

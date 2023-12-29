@@ -28,7 +28,7 @@
             }
         </style>
     </head>
-    <body>
+    <body class="sb-nav-fixed">
     <?php include_once "templates/fixedNavBar.php";?>
         <div id="layoutSidenav">
             <?php include_once "templates/sideBar.php" ?>
@@ -93,6 +93,8 @@
                     ?>
                    <div class="container">
                    <h4>Uploader Note</h4>
+                   <br>
+                   <hr>
                         <form action="" method="post" enctype="multipart/form-data">
                         
                             <div class="form-check mx-0">
@@ -123,34 +125,45 @@
                                 </div>
                             </div>
                         </form>
-                                <hr>
-                    
-                    <div>
-                        <?php 
-                            foreach ($rqs as $rq) {
-                                if($rq['id_ue']==$_SESSION['user']["id_enseignant"]){
-                            ?>
-
-                            <h5><?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?>| <button type="button" class="btn btn-danger">Supprimer</button></h5> 
-                            <div class="text-center">
-                                <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
-                                
-                            </div>
-                        <br>
                         <hr>
-                        <br>
-                        <?php
+                        <form action="" method="post">
+                            <div>
+                            <?php 
+                                foreach ($rqs as $rq) {
+                                    if($rq['id_ue']==$_SESSION['user']["id_enseignant"]){
+                                ?>
+
+                                <h5><?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?>| <button type="button" class="btn btn-danger" id="">Supprimer</button></h5> 
+                                <div class="text-center">
+                                    <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
+                                </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <?php
+                                    }else{
+                                        ?>
+                                <h5><?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?>|<button  type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#myModal">Supprimer</button></h5> 
+                                <div class="text-center">
+                                    <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
+                                </div>
+
+                            <?php
+                                    }
                                 }
-                            }
-                        ?>
+                            ?>  
+                        </div>
                         
-                            
+        
+                        </form>
+                                        
                     </div>
-                   </div>
                 </main>
                 <?php include_once "templates/footer.php";?>
             </div>
         </div>
+        
+    </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
     </body>
