@@ -1,4 +1,14 @@
-<?php session_start() ?>
+<?php session_start();
+    if(!isset($_SESSION['user']))
+        header('Location: error_pages\401.php');
+
+        require_once 'functions_include/connect.php';
+        require_once 'functions_include/those.php';
+        $stm = $con->prepare("SELECT ue.code_UE, ue.id_UE, r.objet_Requette, r.status, r.date_soumission, id_Requette, raison_rejet from requette r JOIN ue on ue.id_UE = r.id_UE  where r.id_Etudiant = :id_ and r.status=-1");
+        $stm->execute(array('id_'=>$_SESSION['user']['id_Etudiant']));
+
+        $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,7 +27,7 @@
             }
             .container{
                 display:flex;
-                flex-direction: row;
+                flex-direction: column-reverse;
                 flex-wrap: wrap;
                 justify-content: space-around;
             }
@@ -32,74 +42,43 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Edition de requette rejetée</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">tableau de bord</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">tableau de bord</a></li>
                             <li class="breadcrumb-item active">requettes rejetées</li>
                         </ol>
                     </div>
                    <div class="container">
-                   <form enctype="multipart/form-data" action=""  method="post" >
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req 1</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
+                    <?php 
+                        $i = 1;
+                        foreach ($rqs as $rq) {
+                    ?>
+                        <form enctype="multipart/form-data" action=""  method="get" >
+                            <div class="card d-flex col-md-10" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">#<?=$rq['code_UE']?> : <?=$rq['objet_Requette']?></h5>
+                                    <p class="card-text "><b>Raison du rejet :</b> <?=$rq['raison_rejet']?></p>
+                                    <?=actionDependOnStatus(2,$rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?>
+                                    <?=actionDependOnStatus(0,$rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?>
+                                    <input type="hidden" id='id_' value="<?=$rq['id_Requette']?>" readonly>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    <form enctype="multipart/form-data" action=""  method="post">
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req 2</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form enctype="multipart/form-data" action=""  method="post">
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req 2</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form enctype="multipart/form-data" action=""  method="post">
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req 3</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form enctype="multipart/form-data" action=""  method="post">
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req 1</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form enctype="multipart/form-data" action=""  method="post">
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req 1</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form enctype="multipart/form-data" action=""  method="post">
-                        <div class="card d-flex col-md-12" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Req ...</h5>
-                                <p class="card-text ">Ici, vous pouvez mettre votre texte assez long. Il sera tronqué avec des points de suspension.</p>
-                                <a href="#" class="btn btn-primary">Modifier</a>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    <?php
+                        $i++;
+                        }
+                    ?>
+                     <script>
+                        function confirmDelete(numeroReq){
+                                let reponse = confirm("Confirmer la suppresion  de la requette N°"+ numeroReq);
+                                console.log("Reponse: "+reponse);
+                                
+                                let xhr = new XMLHttpRequest();
+                                xhr.open("POST", "functions_include/del.php", true);
+                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
+                                xhr.send(params);
+                                
+                        }
+                    </script>
                    </div>
                 </main>
                 <?php include_once "templates/footer.php";?>

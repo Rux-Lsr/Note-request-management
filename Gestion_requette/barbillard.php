@@ -1,4 +1,7 @@
-<?php session_start() ?>
+<?php session_start();
+    if(!isset($_SESSION['user']))
+        header('Location: error_pages\401.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

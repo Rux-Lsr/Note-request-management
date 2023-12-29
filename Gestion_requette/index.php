@@ -1,4 +1,7 @@
 <?php session_start() ;
+    if(!isset($_SESSION['user']))
+        header('Location: error_pages\401.php');
+
     require_once 'functions_include/connect.php';
     require_once 'functions_include/those.php';
     $stm = $con->prepare("SELECT ue.code_UE, r.objet_Requette, e.nom_enseignant, r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette from requette r JOIN ue on ue.id_UE = r.id_UE join enseignant e on e.id_enseignant = r.id_enseignant where r.id_Etudiant = :id_");
@@ -63,11 +66,11 @@
                                                     <td><?=$rq['code_UE']?></td>
                                                     <td><?=$rq['objet_Requette']?></td>
                                                     <td><?=$rq['nom_enseignant']?></td>
-                                                    <td><?=getStatusRq($rq['status'])?></td>
+                                                    <td><?=getStatusRq($rq['status'], $rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?></td>
                                                     <td><?=$rq['date_soumission']?></td>
                                                     <td><?=actionDependOnStatus($rq['status'], $rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?></td>
                                                 </tr>
-                                                <input type="hidden" id='id_' value="<?=$rq['id_Requette']?>">
+                                                <input type="hidden" id='id_' value="<?=$rq['id_Requette']?>" readonly>
                                             </form>  
                                         <?php
                                             $i++;
@@ -76,11 +79,14 @@
                                        <script>
                                         function confirmDelete(numeroReq){
                                                 let reponse = confirm("Confirmer la suppresion  de la requette N°"+ numeroReq);
+                                                console.log("Reponse: "+reponse);
+                                               
                                                 let xhr = new XMLHttpRequest();
                                                 xhr.open("POST", "functions_include/del.php", true);
                                                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                                                 let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
                                                 xhr.send(params);
+                                               
                                         }
                                         </script>
                                     </tbody>
