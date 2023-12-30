@@ -1,7 +1,7 @@
 
 <?php 
     session_start();
-    if(!isset($_SESSION['user']) || isset($_SESSION['user']['matricule']))
+    if(!isset($_SESSION['user']) || isset($_SESSION['user']['matricule_Etudiant']))
     header('Location: ..\error_pages\401.php');
 ?>
 <!DOCTYPE html>

@@ -16,7 +16,7 @@
             case 0 :
                 return "<button class='btn btn-warning'>En cours de traitement</button>";
             case 1 :
-                return "<button class='btn btn-success'>Validé</button>";
+                return "<button type=\"button\" class='btn btn-success'>Validé</button>";
             case -1:
                 return "<a class='btn btn-danger' href='trash-rq.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet&num_rq=$numReq'>Rejettée</a>";
         }
@@ -24,11 +24,11 @@
     function actionDependOnStatus($st, $id_Requette, $numReq, $id_UE, $objet){
         switch($st){
             case 0 :
-                return "<button class=\"btn btn-danger\" onclick='confirmDelete($numReq)'>Annuler</button>";
+                return "<button class=\"btn btn-warning\" onclick='confirmDelete($numReq)'>Annuler</button>";
             case 1 :
-                return "<button class=\"btn btn-success\">OK</button>";
+                return "<button type=\"button\" class=\"btn btn-success\">OK</button>";
             case -1:
-                return "<a class=\"btn btn-warning\" disable href='modif-req.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet'>Modifier</a>";
+                return "<a class=\"btn btn-danger\" disable href='modif-req.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet'>Modifier</a>";
             case 2:
                 return "<a class=\"btn btn-primary\" disable href='modif-req.php?id_rq=$id_Requette&id_ue=$id_UE&obj=$objet'>Modifier</a>";
         }

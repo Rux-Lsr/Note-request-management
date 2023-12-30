@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Edudiant Admin</title>
+        <title>Enseignant- Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <style>
@@ -26,40 +26,59 @@
             }
         </style>
     </head>
-    <body>
+    <body class="sb-nav-fixed">
     <?php include_once "templates/fixedNavBar.php";?>
         <div id="layoutSidenav">
             <?php include_once "templates/sideBar.php" ?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Consultez vos Notes sur les differentes UE</h1>
+                        <h1 class="mt-4">Consultez vos notes</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">tableau de bord</a></li>
                             <li class="breadcrumb-item active">Barbillard</li>
                         </ol>
                     </div>
-                   <div class="container">
+                    <?php 
+                        require_once 'functions_include\connect.php';
+                        $rqs =null;
+                        
+                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue group by code_UE";
+                        $stm = $con->prepare($sql);
+                        $stm->execute();
 
-                    <h4>Libelle matiere | posté le yyyy/mm/dd</h4>
-                    <div>
-                    <div class="text-center">
-                        <img src="assets\img\_27c0601c-87c2-4819-ac72-0ebf3efd7ad1.jpeg" class="img-fluid d-block mx-auto" alt="Description de l'image">
+                        $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                   <div class="container">
+                        <h4><label for='piece'>Votre barbillard</label></h4>
+                        <br>
+                        <hr>
+                        <div>
+                            <?php 
+                                foreach ($rqs as $rq) {
+                                ?>
+
+                                <form action="" method="post">
+                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a></h5> 
+                                    <div class="text-center">
+                                        <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
+                                    </div>
+                                </form>
+                            <br>
+                            <hr>
+                            <br> 
+                            <?php
+                                    }
+                            ?>  
+                        </div>               
                     </div>
-                    <br>
-                    <div class="text-center">
-                        <img src="assets\img\_7bef1e9a-0e28-40ab-9686-1a5440ec5032.jpeg" class="img-fluid d-block mx-auto" alt="Description de l'image">
-                    </div>
-                    <br>
-                    <div class="text-center">
-                        <img src="assets/img/_ef8a7092-873e-4916-8784-18c1206305ca.jpeg" class="img-fluid d-block mx-auto" alt="Description de l'image">
-                    </div>
-                    </div>
-                   </div>
                 </main>
                 <?php include_once "templates/footer.php";?>
             </div>
         </div>
+        
+    </div>
+    
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
     </body>

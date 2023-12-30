@@ -1,6 +1,6 @@
 <?php session_start() ;
-    if(!isset($_SESSION['user']) || isset($_SESSION['user']['matricule']))
-        header('Location: ..\error_pages\401.php');
+    if(!isset($_SESSION['user']) || isset($_SESSION['user']['matricule_Etudiant']))
+    header('Location: ..\error_pages\401.php');
 
     require_once 'functions_include/connect.php';
     require_once 'functions_include/those.php';
