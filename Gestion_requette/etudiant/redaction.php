@@ -20,6 +20,13 @@
                 font-weight: bold;
             }
         </style>
+        <script>
+            window.onload = function(e){
+                e.preventDefault();
+            }
+
+            
+        </script>
     </head>
     <body class="sb-nav-fixed">
     <?php include_once "templates/fixedNavBar.php";?>
