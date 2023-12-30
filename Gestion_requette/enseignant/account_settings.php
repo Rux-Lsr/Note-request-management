@@ -34,9 +34,6 @@
                             <li class="breadcrumb-item active">Paramettre</li>
                         </ol>
                         <?php 
-                            if(!isset($_SESSION['user']))
-                            header('Location: error_pages\401.php');
-                    
                             require_once "functions_include/account_functions.php";
                             require_once 'functions_include/connect.php';
                             if (isset($_POST['sb1'])) {
@@ -56,15 +53,16 @@
                         <form action="" method="post">
                             <div class="form-check">
                                 <label for="usr_name" class="text-secondary font-weight-bold col-form-label">Nom d'utilisateur</label>
-                                <input type="text" class="form-control form-control-lg" id="usr_name" name="usr_name" value="<?=$_SESSION['user']['nom']?>" placeholder="Veuillez saisir votre nom d'utilisateur"  required >
+                                <input type="text" class="form-control form-control-lg" id="usr_name" name="usr_name" value="<?=$_SESSION['user']['nom_enseignant']?>" placeholder="Veuillez saisir votre nom d'utilisateur"  required >
                                 
-                                <button class="btn btn-primary mt-1" onclick="Confirm" type="submit" name="sb1">Modifier</button>
+                                <button class="btn btn-primary mt-1" id=publish type="submit" name="sb1">Modifier</button>
+                                
                             </div>
                         </form>
                        <form action="" method="post">
                             <div class="form-check">
                                 <label for="mail_n" class="text-secondary font-weight-bold col-form-label">Email</label>
-                                <input type="email" class="form-control form-control-lg" id="mail_n" name="mail"  value="<?=$_SESSION['user']['email_Etudiant']?>" placeholder="Veuillez saisir votre E-mail"  required >
+                                <input type="email" class="form-control form-control-lg" id="mail_n" name="mail"  value="<?=$_SESSION['user']['email_enseignant']?>" placeholder="Veuillez saisir votre E-mail"  required >
                                 <button class="btn btn-primary mt-1" type="submit" name="sb2">Modifier</button>
                             </div>
                            

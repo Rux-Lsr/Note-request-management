@@ -7,16 +7,16 @@
         if($type == 0){ 
           
 
-            $sql = "UPDATE etudiant SET nom=:usr where id_Etudiant=:id_";
+            $sql = "UPDATE enseignant SET nom_enseignant=:usr where id_enseignant=:id_";
             $stm = $con->prepare($sql);
             $stm->bindParam(":usr",$param);
-            $stm->bindParam(":id_",$_SESSION['user']['id_Etudiant']);
+            $stm->bindParam(":id_",$_SESSION['user']['id_enseignant']);
             $stm->execute();
             echo "<div class=\"alert alert-success mx-0 mt-0\">Nom d'utilisateur mis à jour avec success</div>";
             //mise à jour de la nouvelle variable de session
-            $sql = "SELECT id_Etudiant, nom, matricule_Etudiant, email_Etudiant, id_filiere from etudiant where id_Etudiant = :id_";
+            $sql = "SELECT id_enseignant, nom_enseignant,  email_enseignant from enseignant where id_enseignant = :id_";
             $stm = $con->prepare($sql);
-            $stm ->bindValue(':id_',$_SESSION['user']['id_Etudiant'] , PDO::PARAM_STR);
+            $stm ->bindValue(':id_',$_SESSION['user']['id_enseignant'] , PDO::PARAM_STR);
             $stm->execute();
             $result = $stm->fetch(PDO::FETCH_ASSOC);
             
@@ -25,22 +25,22 @@
     
         }else if($type==1){
               //verification de doublon de mail dans la bd
-              $sql = "SELECT count(*) FROM etudiant where email_Etudiant=:mail";
+              $sql = "SELECT count(*) FROM enseignant where email_enseignant=:mail";
               $stm = $con->prepare($sql);
-              $stm->bindValue(':mail', $_SESSION["user"]["email_Etudiant"]);
+              $stm->bindValue(':mail', $param);
               $stm->execute();
               $count = $stm->fetchColumn();
             if($count < 1)
             {
-                $sql = "UPDATE etudiant SET email_Etudiant=:usr where id_Etudiant=:id_";
+                $sql = "UPDATE enseignant SET email_enseignant=:usr where id_enseignant=:id_";
                 $stm = $con->prepare($sql);
                 $stm->bindParam(":usr",$param);
-                $stm->bindParam(":id_",$_SESSION['user']['id_Etudiant']);
+                $stm->bindParam(":id_",$_SESSION['user']['id_enseignant']);
                 $stm->execute();
                 echo "<div class=\"alert alert-success mx-0 mt-0\">Email mis à jour avec success</div>";
-                $sql = "SELECT id_Etudiant, nom, matricule_Etudiant, email_Etudiant, id_filiere from etudiant where id_Etudiant = :id_";
+                $sql = "SELECT id_enseignant, nom_enseignant,  email_enseignant, id_filiere from enseignant where id_enseignant = :id_";
                 $stm = $con->prepare($sql);
-                $stm ->bindValue(':id_',$_SESSION['user']['id_Etudiant'] , PDO::PARAM_STR);
+                $stm ->bindValue(':id_',$_SESSION['user']['id_enseignant'] , PDO::PARAM_STR);
                 $stm->execute();
                 $result = $stm->fetch(PDO::FETCH_ASSOC);
                 $_SESSION["user"] = $result;
@@ -48,34 +48,7 @@
                 echo "<div class=\"alert alert-danger mx-0 mt-0\">Email Deja existant</div>";
             }
            
-        }else if($type==2){
-            $sql = "SELECT count(*) FROM etudiant where matricule_Etudiant=:mat";
-            $stm = $con->prepare($sql);
-            $stm->bindValue(':mat', $_SESSION["user"]["matricule_Etudiant"]);
-            $stm->execute();
-            $count = $stm->fetchColumn();
-
-            if ($count < 1) {
-                $sql = "UPDATE etudiant SET matricule_Etudiant=:usr where id_Etudiant=:id_";
-                $stm = $con->prepare($sql);
-                $stm->bindParam(":usr",$param);
-                $stm->bindParam(":id_",$_SESSION['user']['id_Etudiant']);
-                $stm->execute();
-    
-                echo "<div class=\"alert alert-success mx-0 mt-0\">Matricule mis à jour avec success</div>";
-    
-                $sql = "SELECT id_Etudiant, nom, matricule_Etudiant, email_Etudiant, id_filiere from etudiant where id_Etudiant = :id_";
-                $stm = $con->prepare($sql);
-                $stm ->bindValue(':id_',$_SESSION['user']['id_Etudiant'] , PDO::PARAM_STR);
-                $stm->execute();
-                $result = $stm->fetch(PDO::FETCH_ASSOC);
-                $_SESSION["user"] = $result;
-            }else{
-                echo "<div class=\"alert alert-danger mx-0 mt-0\">matricule deja existant</div>";
-            }
-           
         }
-
     }
 
     function updatePswd($param, $new_mdp){
@@ -85,17 +58,17 @@
             die("Connexion echoué");
 
         $param = htmlspecialchars($param);
-        $sql = "SELECT count(*) FROM etudiant where id_Etudiant=:id_ and mdp=:pswd";
+        $sql = "SELECT count(*) FROM enseignant where id_enseignant=:id_ and mdp=:pswd";
         $stm = $con->prepare($sql);
-        $stm->bindValue(':id_', $_SESSION["user"]["id_Etudiant"]);
+        $stm->bindValue(':id_', $_SESSION["user"]["id_enseignant"]);
         $stm->bindValue(':pswd', $param);
         $stm->execute();
         $count = $stm->fetchColumn();
         if ($count > 0) {
-            $sql = "UPDATE etudiant SET mdp=:ps where id_Etudiant=:id_";
+            $sql = "UPDATE enseignant SET mdp=:ps where id_enseignant=:id_";
             $stm = $con->prepare($sql);
             $stm->bindParam(":ps",$new_mdp);
-            $stm->bindParam(":id_",$_SESSION['user']['id_Etudiant']);
+            $stm->bindParam(":id_",$_SESSION['user']['id_enseignant']);
             $stm->execute();
             echo "<div class=\"alert alert-success mx-0 mt-0\">Mot de passe mis à jour avec success</div>";
         }else {

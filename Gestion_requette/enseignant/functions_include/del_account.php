@@ -5,11 +5,11 @@
         if($con == false)
             die("Connexion echoué");
 
-        $sql = "DELETE FROM etudiant where id_Etudiant = :id_";
+        $sql = "DELETE FROM enseignant where id_enseignant = :id_";
         $stm =$con->prepare($sql);
-        $stm->bindValue(':id_', $_SESSION["user"]["id_Etudiant"]);
+        $stm->bindValue(':id_', $_SESSION["user"]["id_enseignant"]);
         $stm->execute();
 
         session_destroy();
-        header('Location: ');
+        
     }
