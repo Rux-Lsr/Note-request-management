@@ -32,8 +32,44 @@
             }
            $('#mon-select').selectpicker();
         </script>
+                <style>
+            .navbar-custom {
+            background-color: #f8f9fa; /* Couleur claire */
+            box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1); /* Bordure inférieure ombrée */
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav .nav-link  {
+            color: gray;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Ombre sur la bordure supérieure */
+        }
+        .navbar-custom:hover .navbar-nav:hover .nav-link:hover{
+            color:black;
+        }
+        </style>
     </head>
     <body class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <a class="navbar-brand" href="#">Gestion de requette</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="etudiant/authentication/register.php">Etudiant <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="enseignant/authentication/login.php">Enseignant</a>
+                    </li> -->
+                </ul>
+            </div>
+        </nav>
         <?php 
             if(isset($_POST["submit_button"])){
                 
@@ -58,7 +94,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Creer un compte enseignant</h3></div>
                                     <div class="card-body">
                                         <form action="" method="post">
                                             <div class="row mb-3">

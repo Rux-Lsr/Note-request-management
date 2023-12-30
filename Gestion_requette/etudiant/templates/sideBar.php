@@ -1,8 +1,8 @@
 
 <div id="layoutSidenav_nav">
-    <nav class="sb-sidenav accordion sb-sidenav-dark navbar-fixed" id="sidenavAccordion">
-        <div class="sb-sidenav-menu">
-            <div class="nav">
+    <nav class="sb-sidenav accordion sb-sidenav-lg navbar-fixed" id="sidenavAccordion" style="box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.1);">
+        <div class="sb-sidenav-menu" >
+            <div class="nav" >
                 <div class="sb-sidenav-menu-heading">Acceuil</div>
                 <a class="nav-link" href="index.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
