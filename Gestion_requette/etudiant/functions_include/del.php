@@ -5,6 +5,9 @@
         $stm = $con->prepare("DELETE from requette where id_Requette = :id_");
         $stm->bindValue(':id_', $_POST['id']);
         $stm->execute();
+        echo "success";
+    }else{
+        echo "annulée";
     }
 
 ?>

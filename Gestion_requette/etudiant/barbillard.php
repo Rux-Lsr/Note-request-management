@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Enseignant- Admin</title>
+        <title>Etudiant- admin</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <style>
@@ -39,6 +39,7 @@
                             <li class="breadcrumb-item active">Barbillard</li>
                         </ol>
                     </div>
+                   
                     <?php 
                         require_once 'functions_include\connect.php';
                         $rqs =null;
@@ -49,10 +50,9 @@
 
                         $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
                     ?>
+                    <hr>
                    <div class="container">
-                        <h4><label for='piece'>Votre barbillard</label></h4>
-                        <br>
-                        <hr>
+                        
                         <div>
                             <?php 
                                 foreach ($rqs as $rq) {

@@ -42,7 +42,7 @@
                                 Status des requettes
                             </div>
                             <div class="card-body">
-                                <table class="table table-light">
+                                <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr> 
                                             <th>N°</th>
@@ -60,7 +60,7 @@
                                             $i = 1;
                                             foreach ($rqs as $rq) { 
                                         ?>
-                                            <form action="" method="get">
+                                            <form action="" method="get" >
                                                 <tr>
                                                     <td><?=$i?></td>
                                                     <td><?=$rq['code_UE']?></td>
@@ -79,14 +79,19 @@
                                        <script>
                                         function confirmDelete(numeroReq){
                                                 let reponse = confirm("Confirmer la suppresion  de la requette N°"+ numeroReq);
-                                                console.log("Reponse: "+reponse);
-                                               
                                                 let xhr = new XMLHttpRequest();
                                                 xhr.open("POST", "functions_include/del.php", true);
                                                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                                                 let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
                                                 xhr.send(params);
-                                               
+
+                                                xhr.onreadystatechange = function(){
+                                                    if(this.readyState == 4 && this.status==200){
+                                                        console.log(this.response);
+                                                    }
+                                                }
+
+                                                window.preventDefault();
                                         }
                                         </script>
                                     </tbody>
@@ -103,7 +108,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-da tatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+       
     </body>
 </html>

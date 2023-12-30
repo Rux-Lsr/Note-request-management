@@ -14,7 +14,7 @@
     function getStatusRq($st, $id_Requette, $numReq, $id_UE, $objet){
         switch ($st){
             case 0 :
-                return "<button class='btn btn-warning'>En cours de traitement</button>";
+                return "<button type = \"button\" class='btn btn-warning'>En cours de traitement</button>";
             case 1 :
                 return "<button type=\"button\" class='btn btn-success'>Validé</button>";
             case -1:

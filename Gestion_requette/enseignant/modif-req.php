@@ -43,7 +43,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <body class="sb-nav-fixed">
     <?php include_once "templates/fixedNavBar.php";?>
         <div id="layoutSidenav">
             <?php include_once "templates/sideBar.php" ?>
@@ -55,7 +55,6 @@
                             <li class="breadcrumb-item"><a href="index.html">dashboard</a></li>
                             <li class="breadcrumb-item active">Requette</li>
                         </ol>
-                       
                         <?php include_once "templates/template_req.php";?>
                     </div>
                 </main>

@@ -1,4 +1,4 @@
-<form enctype="multipart/form-data" action=""  method="post">
+<form enctype="multipart/form-data" id="query_template">
 <h4 id="titleUe">Choix de l'UE</h4><br>
     <div class="form-check d-flex col-md-12">
         <select class="form-select form-control-lg" id="selectlevel"  name="ue" required>
@@ -16,12 +16,6 @@
     </div>
         <div class="col-md-4"></div>
             
-            <script>
-                document.getElementById("ueOption").addEventListener("click", function() {
-                    document.getElementById("ueForm").style.display = 'none';
-                    console.log("click sur le premier formulaire")
-                })
-            </script>
         <div class="col-md-4"></div>
     <hr>
     <h4>Template de la requette</h4>
@@ -63,15 +57,15 @@
         <script>
             let browseBtn = document.getElementById("parcourir");
             let file = document.querySelector("#fichier");
-            console.log(file+"\n "+ browseBtn);
+            
 
             browseBtn.addEventListener("click", function (){
                 file.click();
-                console.log("Click sur parcourir")
+                
             });
             file.addEventListener("change", function(e){
                 document.getElementById("fileName").value = e.target.files[0].name;
-                console.log("changement d'etat de lentree de fichier");
+                
             });
         </script>
         </div>
@@ -79,6 +73,6 @@
     <br>
     <div class="col-md-12 d-flex">
         <div class="col-md-3"></div>
-        <button type="submit" class="btn btn-primary col-md-6 " name="submit1">Envoyer</button>
+        <button type="submit" class="btn btn-primary col-md-6 " id ="query_submit" name="submit1">Envoyer</button>
     <div class="col-md-3"></div>  
 </form>                           

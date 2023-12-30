@@ -9,7 +9,7 @@ function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
         // Création d'un objet PDOStatement
         $stm = $con->prepare($sql);
         // Liaison de la valeur au marqueur
-        $stm->bindValue(":matricule", $matricule);
+        $stm->bindValue(":matricule", strtoupper($matricule));
         // Exécution de la requête
         $stm->execute();
         // Récupération du nombre de lignes
@@ -41,7 +41,7 @@ function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
                 $stm = $con->prepare($sql);
                 // Liaison des valeurs aux marqueurs
                 $stm->bindValue(":nom", $nom);
-                $stm->bindValue(":matricule", $matricule);
+                $stm->bindValue(":matricule", strtoupper($matricule));
                 $stm->bindValue(":mail", $mail);
                 $stm->bindValue(":id_fil", $id_fil);
                 $stm->bindValue(":pswd", $pswd);
@@ -81,32 +81,6 @@ function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
         }
     }
 }
-
-
-// Définition de la fonction
-function afficher_modal($titre, $texte){
-    // Affichage du bouton qui déclenche le modal
-    echo "";
-    // Affichage du contenu du modal
-    echo "<div class=\"modal fade\" id=\"monModal\" tabindex=\"-1\" aria-labelledby=\"titreModal\" aria-hidden=\"true\">";
-    echo "<div class=\"modal-dialog\">";
-    echo "<div class=\"modal-content\">";
-    echo "<div class=\"modal-header\">";
-    echo "<h5 class=\"modal-title\" id=\"titreModal\">$titre</h5>"; // Utilisation du paramètre $titre
-    echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Fermer\"></button>";
-    echo "</div>";
-    echo "<div class=\"modal-body\">";
-    echo "<p>$texte</p>"; // Utilisation du paramètre $texte
-    echo "</div>";
-    echo "<div class=\"modal-footer\">";
-    echo "<button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Fermer</button>";
-   
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
-}
-
 // Appel de la fonction avec des exemples de paramètres
 
 

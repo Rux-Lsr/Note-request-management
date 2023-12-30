@@ -30,6 +30,11 @@
             color:black;
         }
         </style>
+        <script>
+            window.onload = function (e) {
+                e.preventDefault();
+            }
+        </script>
     </head>
 
     <body>

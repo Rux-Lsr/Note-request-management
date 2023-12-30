@@ -94,7 +94,7 @@
                             <script>
                                 function delAccount(){
                                     let reponse = confirm("Voulez vous vraiment supprimer votre compte (cette action est irreversible)?")
-                                    
+                                    window.preventDefaul();
                                     let xhr = new XMLHttpRequest();
                                     xhr.open("POST", "functions_include/del_account.php", true);
                                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

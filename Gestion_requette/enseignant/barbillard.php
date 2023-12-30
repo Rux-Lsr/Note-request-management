@@ -43,7 +43,7 @@
                     <?php 
                     require_once 'functions_include\connect.php';
                         $rqs =null;
-                         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['piece'])) {
                             // Téléchargement du fichier
                             $file_name = $_FILES['piece']['name'];
                             $file_tmp = $_FILES['piece']['tmp_name'];
@@ -136,6 +136,7 @@
                                                 location.reload();   
                                             }
                                         });
+                                        location.reload();  
                                     });
                                 </script>
                                 </div>
@@ -166,7 +167,9 @@
                                 <div class="text-center">
                                     <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
                                 </div>
-                                
+                                <br>
+                                <hr>
+                                <br>
                             <?php
                                     }
                                 }

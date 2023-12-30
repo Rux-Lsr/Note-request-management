@@ -36,6 +36,7 @@
             .navbar-custom {
             background-color: #f8f9fa; /* Couleur claire */
             box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1); /* Bordure inférieure ombrée */
+            margin-bottom: 20px;
         }
         .navbar-custom .navbar-brand,
         .navbar-custom .navbar-nav .nav-link  {
@@ -52,6 +53,11 @@
             color:black;
         }
         </style>
+        <script>
+            window.onload = function (e) {
+                e.preventDefault();
+            }
+        </script>
     </head>
     <body class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-custom">
