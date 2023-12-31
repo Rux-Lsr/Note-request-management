@@ -39,7 +39,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-custom" >
-            <a class="navbar-brand" href="#">Gestion de requette</a>
+            <a class="navbar-brand" href="../../index.php">Gestion de requette</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

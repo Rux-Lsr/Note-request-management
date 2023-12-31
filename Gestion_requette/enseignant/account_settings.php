@@ -82,11 +82,11 @@
                         </form>
                         
                         <hr>
-                        <form action="" method="post">
+                        <form action="" method="post" style="display:none">
                         <div class="form-check">
                             <label for="objet" class="text-secondary font-weight-bold col-form-label">Suppression de Compte</label>
                             <br>
-                            <button class="btn btn-danger" onclick="delAccount();" type="submit" name="sb4">Supprimmer le compte</button>
+                            <button class="btn btn-danger" onclick="delAccount();" type="submit" name="sb4" disabled>Supprimmer le compte</button>
                         </div>
                         
                         </form>

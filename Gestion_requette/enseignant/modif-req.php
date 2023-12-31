@@ -5,12 +5,8 @@
     // Préparation de la requête SQL
     require_once 'functions_include\connect.php';
 
-    if(isset($_POST["submit1"])){
-        $stm = $con->prepare("UPDATE requette set status = 1 where id_Requette=:id_");
-        $stm->bindValue(':id_',$_GET['id_rq']);
-        $stm->execute();
-        header("Location: index.php");
-    }else if(isset($_POST["rejetter"])){
+    
+     if(isset($_POST["rejetter"])){
         $stm = $con->prepare("UPDATE requette r set r.status = -1, r.raison_rejet =:rj
          where id_Requette=:id_");
         $stm->bindValue(':id_',$_GET['id_rq']);

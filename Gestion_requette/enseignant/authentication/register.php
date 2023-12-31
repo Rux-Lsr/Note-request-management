@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Register - SB Admin</title>
+        <title>Register - querynote</title>
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script>
@@ -55,7 +55,7 @@
     </head>
     <body class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-custom">
-            <a class="navbar-brand" href="#">Gestion de requette</a>
+            <a class="navbar-brand" href="../../index.php">Gestion de requette</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -71,22 +71,37 @@
             </div>
         </nav>
         <?php 
-            if(isset($_POST["submit_button"])){
-                
-                if(!empty($_POST["user_name"]) && !empty($_POST["matricule"]) && !empty($_POST["mail"])&& !empty($_POST["mdp"])){
-                    //require_once "functions_include/connect.php";
-                    include_once "../functions_include/inscription.php";
-                    $nom = htmlspecialchars($_POST['user_name']);
-                    $matricule = htmlspecialchars($_POST['matricule']);
-                    $mail=htmlspecialchars($_POST['mail']);
-                    $mdp=htmlspecialchars($_POST['mdp']);
-
-                    insertInto("etudiant", $nom,$matricule, $mail, $mdp, $_POST["filiere"]);
-
+            $msg = "E-mail ou mot de passe incorrect";
+            if(isset($_POST["submit"])){
+                $mail = htmlspecialchars($_POST['mail']);
+                $mdp = htmlspecialchars($_POST['pswd']);
+                if(!empty($mail) && !empty($mdp)){
+                    // Vérifiez si l'adresse e-mail est valide
+                    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                        echo "Format d'e-mail invalide";
+                        return;
+                    }
+                    require_once '../functions_include\connect.php';
+                    $sql = "SELECT id_enseignant, nom_enseignant, email_enseignant, mdp from enseignant where email_enseignant = :mail";
+                    $stm = $con->prepare($sql);
+                    $stm ->bindValue(':mail',$mail , PDO::PARAM_STR );
+                    $stm->execute();
+                    $result = $stm->fetch(PDO::FETCH_ASSOC);
+                    if($result){
+                        // Vérifiez si le mot de passe est correct
+                        if ($mdp == $result['mdp']) {
+                            $_SESSION["user"] = $result;
+                            header("Location:../index.php");
+                        } else {
+                            echo "<div class='alert alert-warning mx-0 mt-0'>$msg</div>";
+                        }
+                    } else {
+                        echo "<div class='alert alert-warning mx-0 mt-0'>$msg</div>";
+                    }
                 }
-                    
             }
         ?>
+
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>

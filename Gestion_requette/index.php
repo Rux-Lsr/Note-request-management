@@ -28,7 +28,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="#">Gestion de requette</a>
+        <a class="navbar-brand" href="index.php">Gestion de requette</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -47,10 +47,10 @@
         <h1 class="text-center mt-5">Bienvenue sur notre site</h1>
         <div class="row mt-5">
             <div class="col text-center">
-                <a href="/partie1" class="btn btn-primary">Connexion Partie 1</a>
+                <a href="enseignant/authentication/login.php" class="btn btn-primary">Enseignant</a>
             </div>
             <div class="col text-center">
-                <a href="/partie2" class="btn btn-secondary">Connexion Partie 2</a>
+                <a href="etudiant/authentication/login.php" class="btn btn-secondary">Etudiant</a>
             </div>
         </div>
     </div>

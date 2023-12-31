@@ -27,11 +27,32 @@
         <label for="piece" class="text-secondary font-weight-bold col-form-label">Decision</label>
         <br>
         <span class="input-group-append">
-            <button type="submit" class="btn btn-success" name="submit1">Valider</button>
+            <button type="submit" class="btn btn-success" name="submit1" onclick="valider(<?=$_GET['id_rq']?>);">Valider</button>
             <button  type = "button"class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#myModal">Rejeter</button>
         </span>
     </div>
+    <script>
+        function valider(params) {
+            window.onload = function (e){
+                e.preventDefault();
+            }
+            let reponse = confirm("Valider cette requette?");
 
+            let xhr = new  XMLHttpRequest()
+            
+            xhr.open("POST", "valider.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            let url = "reponse="+reponse+"&id="+params;
+            xhr.send(url);
+
+            xhr.onreadystatechange = function (){
+                if(this.status=200){
+                    console.log(this.response);
+                }
+            }
+            location.href = "index.php";
+        }
+    </script>
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
