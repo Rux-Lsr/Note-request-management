@@ -14,7 +14,7 @@
             $stm->execute();
             echo "<div class=\"alert alert-success mx-0 mt-0\">Nom d'utilisateur mis à jour avec success</div>";
             //mise à jour de la nouvelle variable de session
-            $_SESSION['user']['id_Etudiant']=$param;
+            $_SESSION['user']['nom']=$param;
             
     
         }else if($type==1){
@@ -32,7 +32,7 @@
                 $stm->bindParam(":id_",$_SESSION['user']['id_Etudiant']);
                 $stm->execute();
                 echo "<div class=\"alert alert-success mx-0 mt-0\">Email mis à jour avec success</div>";
-                $_SESSION['user']['id_Etudiant']=$param;
+                $_SESSION['user']['email_Etudiant']=$param;
             }else{
                 echo "<div class=\"alert alert-danger mx-0 mt-0\">Email Deja existant</div>";
             }
@@ -53,7 +53,7 @@
     
                 echo "<div class=\"alert alert-success mx-0 mt-0\">Matricule mis à jour avec success</div>";
     
-                $_SESSION['user']['id_Etudiant']=$param;
+                $_SESSION['user']['matricule_Etudiant']=$param;
             }else{
                 echo "<div class=\"alert alert-danger mx-0 mt-0\">matricule deja existant</div>";
             }
@@ -82,7 +82,7 @@
             $stm->bindParam(":id_",$_SESSION['user']['id_Etudiant']);
             $stm->execute();
             echo "<div class=\"alert alert-success mx-0 mt-0\">Mot de passe mis à jour avec success</div>";
-            $_SESSION['user']['id_Etudiant']=$param;
+            $_SESSION['user']['mdp']=$param;
         }else {
             echo "<div class=\"alert alert-warning mx-0 mt-0\">mot de passe actuel erroné</div>";
         }

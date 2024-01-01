@@ -50,35 +50,7 @@ function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
                header("Location: ../log.php");
             }
         }
-    }else if($tableName =="enseignant"){
-        // Préparation de la requête pour vérifier l'existence du mail
-        $sql = "SELECT * FROM $tableName WHERE email_enseignant = :mail";
-        // Création d'un objet PDOStatement
-        $stm = $con->prepare($sql);
-        // Liaison de la valeur au marqueur
-        $stm->bindValue(":mail", $mail);
-        // Exécution de la requête
-        $stm->execute();
-        // Récupération du nombre de lignes
-        $rs = $stm->fetchAll(PDO::FETCH_ASSOC);
-        $count = count($rs);
-        // Si le résultat est supérieur à zéro, le mail existe déjà
-        if($count > 0){
-            afficher_modal("Message", "Impossible, ce mail existe déjà dans la base de données");
-        }else{
-            // Préparation de la requête pour insérer les données
-            $sql = "INSERT INTO $tableName (`nom_enseignant`, `email_enseignant`, `id_filiere`, `mdp`)
-                    VALUES (:nom, :mail, :id_fil, :pswd)";
-            // Création d'un objet PDOStatement
-            $stm = $con->prepare($sql);
-            // Liaison des valeurs aux marqueurs
-            $stm->bindValue(":nom", $nom);
-            $stm->bindValue(":mail", $mail);
-            $stm->bindValue(":id_fil", $id_fil);
-            $stm->bindValue(":pswd", $pswd);
-            // Exécution de la requête
-            $stm->execute();
-        }
+    
     }
 }
 // Appel de la fonction avec des exemples de paramètres

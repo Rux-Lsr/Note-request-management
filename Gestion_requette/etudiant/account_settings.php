@@ -3,6 +3,8 @@
     session_start();
     if(!isset($_SESSION['user']['matricule_Etudiant']))
         header('Location: ..\error_pages\401.php');
+
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +36,6 @@
                             <li class="breadcrumb-item active">Paramettre</li>
                         </ol>
                         <?php 
-                            if(!isset($_SESSION['user']))
-                            header('Location: error_pages\401.php');
-                    
                             require_once "functions_include/account_functions.php";
                             require_once 'functions_include/connect.php';
                             if (isset($_POST['sb1'])) {
@@ -98,9 +97,14 @@
                         </form>
                     </div>
                             <script>
+                                 window.onload=function (params) {
+                                        params.preventDefault();
+                                    }
                                 function delAccount(){
                                     let reponse = confirm("Voulez vous vraiment supprimer votre compte (cette action est irreversible)?")
-                                    
+                                    window.onload=function (params) {
+                                        params.preventDefault();
+                                    }
                                     let xhr = new XMLHttpRequest();
                                     xhr.open("POST", "functions_include/del_account.php", true);
                                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
