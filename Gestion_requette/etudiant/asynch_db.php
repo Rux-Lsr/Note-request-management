@@ -27,8 +27,8 @@
         }
     
         // Vérification de la taille du fichier (3Mo max)
-        if($file_size > 3000000 && $t>0){
-            echo("Le fichier est trop volumineux, veuillez choisir un fichier de moins de 3Mo.");
+        if($file_size > 5000000 && $t>0){
+            echo("Le fichier est trop volumineux, veuillez choisir un fichier de moins de 5Mo.");
             $t = 0;
         }
     

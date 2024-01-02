@@ -1,6 +1,6 @@
 <?php
 
-function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
+function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere, $nv){
     require_once "connect.php";
     $id_fil = ($filiere == "ICT4D") ? 1 : 2 ;
     if($tableName == "etudiant"){
@@ -35,8 +35,8 @@ function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
                 echo "<div class='alert alert-warning' role='alert'>Adresse e mail deja existante</div>";
             }else{
                 // Préparation de la requête pour insérer les données
-                $sql = "INSERT INTO $tableName (`nom`, `matricule_Etudiant`, `email_Etudiant`, `id_filiere`, `mdp`)
-                        VALUES (:nom, :matricule, :mail, :id_fil, :pswd)";
+                $sql = "INSERT INTO $tableName (`nom`, `matricule_Etudiant`, `email_Etudiant`, `id_filiere`, `mdp`, `niveau`)
+                        VALUES (:nom, :matricule, :mail, :id_fil, :pswd, :nv)";
                 // Création d'un objet PDOStatement
                 $stm = $con->prepare($sql);
                 // Liaison des valeurs aux marqueurs
@@ -45,6 +45,7 @@ function insertInto($tableName, $nom, $matricule, $mail, $pswd, $filiere){
                 $stm->bindValue(":mail", $mail);
                 $stm->bindValue(":id_fil", $id_fil);
                 $stm->bindValue(":pswd", $pswd);
+                $stm->bindValue(":nv", $nv);
                 // Exécution de la requête
                 $stm->execute();
                header("Location: ../log.php");

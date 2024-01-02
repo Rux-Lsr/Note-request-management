@@ -61,7 +61,7 @@
                 $mdp = htmlspecialchars($_POST['pswd']);
                 if(!empty($mail) && !empty($mdp)){
                     require_once '../functions_include\connect.php';
-                    $sql = "SELECT id_Etudiant, nom, matricule_Etudiant, email_Etudiant, id_filiere from etudiant where email_Etudiant = :mail and mdp = :mdp";
+                    $sql = "SELECT id_Etudiant, nom, matricule_Etudiant, email_Etudiant, id_filiere, niveau from etudiant where email_Etudiant = :mail and mdp = :mdp";
                     $stm = $con->prepare($sql);
                     $stm ->bindValue(':mail',$mail , PDO::PARAM_STR );
                     $stm ->bindValue(':mdp' ,$mdp);
