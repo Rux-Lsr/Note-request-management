@@ -140,8 +140,8 @@
                                                 
                                                 <div><label for="filere">Filere</label>
                                                     <select id="mon-select" class="form-select"  name="filiere" aria-required>
-                                                        <option value="1">ICT4D</option>
-                                                        <option value="2" disabled>INFO(comming soon)</option>
+                                                        <option value="ICT4D">ICT4D</option>
+                                                        <option value="INFO" disabled>INFO(comming soon)</option>
                                                     </select>
                                                 </div>
                                                 <div style="margin-left: 5px;">

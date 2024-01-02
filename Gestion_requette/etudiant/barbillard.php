@@ -44,7 +44,7 @@
                         require_once 'functions_include\connect.php';
                         $rqs =null;
                         
-                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue and ue.code_niveau={$_SESSION['user']['niveau']} group by code_UE";
+                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue and ue.code_niveau={$_SESSION['user']['niveau']} and ue.id_Filiere={$_SESSION['user']['id_filiere']} group by code_UE";
                         $stm = $con->prepare($sql);
                         $stm->execute();
 

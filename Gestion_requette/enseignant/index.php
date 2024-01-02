@@ -4,10 +4,20 @@
 
     require_once 'functions_include/connect.php';
     require_once 'functions_include/those.php';
-    $stm = $con->prepare("SELECT  r.objet_Requette,  r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette, e.nom, e.matricule_Etudiant from requette r  join etudiant e on e.id_Etudiant = r.id_Etudiant where r.id_enseignant = :id_ order by r.status");
+    $stm = $con->prepare("SELECT distinct r.objet_Requette,  r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette, e.nom, e.matricule_Etudiant from requette r  join etudiant e on e.id_Etudiant = r.id_Etudiant where r.id_enseignant = :id_ order by r.status");
     $stm->execute(array('id_'=>$_SESSION['user']['id_enseignant']));
 
     $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
+    //nombre req non traitée
+    $stm = $con->prepare("SELECT count(*) from requette where id_enseignant=:id_ and requette.status=0");
+    $stm->bindValue(":id_", $_SESSION["user"]["id_enseignant"]);
+    $stm->execute();
+    $countnbrequettenontraite = $stm->fetch(PDO::FETCH_ASSOC);
+    
+    $stm = $con->prepare("SELECT count(*) from requette where id_enseignant=:id_ and requette.status<>0");
+    $stm->bindValue(":id_", $_SESSION["user"]["id_enseignant"]);
+    $stm->execute();
+    $countnbrequettetraite = $stm->fetch(PDO::FETCH_ASSOC)['count(*)'];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,7 +49,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Status des requettes
+                                Requette non traitée (<?=$countnbrequettenontraite["count(*)"];?>)
                             </div>
                             <div class="card-body">
                                 <table class="table table-light">
@@ -58,7 +68,7 @@
                                         <?php 
                                             $i = 1;
                                             foreach ($rqs as $rq) { 
-                                               
+                                               if($rq['status'] == 0){
                                         ?>
                                             <form action="" method="get">
                                                 <tr>
@@ -73,14 +83,59 @@
                                             </form>  
                                         <?php
                                             $i++;
+                                               }
                                             }
                                         ?>
-                                       
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
+                        <hr>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Requette traitées (<?=$countnbrequettetraite?>)
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-light">
+                                    <thead>
+                                        <tr> 
+                                            <th>N°</th>
+                                            <th>Objet</th>
+                                            <th>Matricule</th>
+                                            <th>Nom</th>
+                                            <th>Date de soumission</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php 
+                                            $i = 1;
+                                            foreach ($rqs as $rq) { 
+                                               if($rq['status'] != 0){
+                                        ?>
+                                            <form action="" method="get">
+                                                <tr>
+                                                    <td><?=$i?></td>
+                                                    <td><?=$rq['objet_Requette']?></td>
+                                                    <td><?=$rq['matricule_Etudiant']?></td>
+                                                    <td><?=$rq['nom']?></td>
+                                                    <td><?=$rq['date_soumission']?></td>
+                                                    <td><?=actionDependOnStatus($rq['status'], $rq['id_Requette'], $i, $rq['id_UE'], $rq['objet_Requette'])?></td>
+                                                </tr>
+                                                <input type="hidden" id='id_' value="<?=$rq['id_Requette']?>" readonly>
+                                            </form>  
+                                        <?php
+                                            $i++;
+                                               }
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>  
                 </main>
                <?php include_once "templates/footer.php";?>
             </div>

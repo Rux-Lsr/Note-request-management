@@ -84,7 +84,7 @@
                                 echo "<div class='alert alert-success'>Publication reussie</div>";
                               }
                         }
-                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue order by date_de_publication";
+                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue order by date_de_publication desc";
                         $stm = $con->prepare($sql);
                         $stm->execute();
 
@@ -160,15 +160,6 @@
                             <br>
                             <hr>
                             <br>
-                            <?php
-                                    }else{
-                                        ?>
-                                <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a></h5> 
-                                <div class="text-center">
-                                    <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
-                                </div>
-                                <br>
-                                <hr>
                                 <br>
                             <?php
                                     }

@@ -4,7 +4,7 @@
     if(!isset($_SESSION['user']['matricule_Etudiant']))
         header('Location: ..\error_pages\401.php');
         require_once "functions_include/connect.php";
-        $sql = "SELECT id_UE, code_UE from ue where code_niveau= :nv";
+        $sql = "SELECT id_UE, code_UE from ue where code_niveau= :nv and ue.id_filiere={$_SESSION['user']['id_filiere']}";
         $stm = $con->prepare($sql);
         $stm->bindValue(":nv", $_SESSION['user']['niveau']);
         $stm->execute();
