@@ -54,12 +54,12 @@
                    <div class="container">
                         
                         <div>
-                            <?php 
-                                foreach ($rqs as $rq) {
+                                <?php 
+                                    foreach ($rqs as $rq) {
                                 ?>
 
                                 <form action="" method="post">
-                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a></h5> 
+                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a>  <a href="redaction.php?">Requette</a></h5> 
                                     <div class="text-center">
                                         <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
                                     </div>
