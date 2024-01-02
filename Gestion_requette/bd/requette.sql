@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 30 déc. 2023 à 12:29
+-- Généré le : mar. 02 jan. 2024 à 18:09
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.1
 
@@ -39,7 +39,7 @@ CREATE TABLE `enseignant` (
 --
 
 INSERT INTO `enseignant` (`id_enseignant`, `nom_enseignant`, `email_enseignant`, `mdp`) VALUES
-(1, 'moyou brice', 'moyou@univ.com', 'Katon2.0'),
+(1, 'moyou brice ', 'moyou@univ.com', 'Suiton2.0'),
 (2, 'prof de bd system', 'bdsystem@univ.com', '5678'),
 (3, 'Catcha', 'catcha@univ.com', 'abcd'),
 (4, 'Valery', 'valery@univ.com', 'efgh'),
@@ -47,7 +47,8 @@ INSERT INTO `enseignant` (`id_enseignant`, `nom_enseignant`, `email_enseignant`,
 (6, 'Aboubacar Bouki', 'boukiBoucar@univ.com', 'mnop'),
 (7, 'prof d\'anglais', 'anglais@gmail.com', 'eng'),
 (8, 'prof de francais', 'profdefrancais@gmail.com', 'fran'),
-(9, 'prof de reseau', 'reseau@gmail.com', 'reseau');
+(9, 'prof de reseau', 'reseau@gmail.com', 'reseau'),
+(10, 'testeur', 'testeur@gmail.com', 'testeur2.0');
 
 -- --------------------------------------------------------
 
@@ -61,22 +62,33 @@ CREATE TABLE `etudiant` (
   `matricule_Etudiant` varchar(9) DEFAULT NULL,
   `email_Etudiant` varchar(255) DEFAULT NULL,
   `id_filiere` int(11) DEFAULT NULL,
-  `mdp` varchar(255) NOT NULL
+  `mdp` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL DEFAULT 0,
+  `niveau` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`id_Etudiant`, `nom`, `matricule_Etudiant`, `email_Etudiant`, `id_filiere`, `mdp`) VALUES
-(1, 'Itoshi Rin', 'E001', 'e001@univ.com', 1, 'qwer'),
-(2, 'sasuke uchiwa', 'E002', 'e002@univ.com', 1, 'tyui'),
-(3, 'naruto uzumaki', 'E003', 'e003@univ.com', 1, 'asdf'),
-(4, 'Lontsi Sonwa Russel', 'E004', 'e004@univ.com', 1, 'ghjk'),
-(5, 'King bradley', 'E005', 'e005@univ.com', 1, 'zxcv'),
-(6, 'man of black', 'E006', 'e006@univ.com', 1, 'bnm'),
-(7, 'Ernester Dragneel', '21A2348', 'aaa@aaa', 2, 'Katon2.0'),
-(11, 'qsqdqs', '21Q2439', 'qsdqs@gmail.com', 2, 'aaa');
+INSERT INTO `etudiant` (`id_Etudiant`, `nom`, `matricule_Etudiant`, `email_Etudiant`, `id_filiere`, `mdp`, `type`, `niveau`) VALUES
+(1, 'Itoshi Rin', 'E001', 'e001@univ.com', 1, 'qwer', 0, 2),
+(2, 'sasuke uchiwa', 'E002', 'e002@univ.com', 1, 'tyui', 0, 2),
+(3, 'naruto uzumaki', 'E003', 'e003@univ.com', 1, 'asdf', 0, 2),
+(4, 'Lontsi Sonwa Russel', 'E004', 'e004@univ.com', 1, 'ghjk', 0, 2),
+(5, 'King bradley', 'E005', 'e005@univ.com', 1, 'zxcv', 0, 2),
+(6, 'man of black', 'E006', 'e006@univ.com', 1, 'bnm', 0, 2),
+(7, 'Eterias natsu dragneel', '21k2348', 'dragnellsonwa@gmail.com', 2, 'Testeur2.0', 0, 2),
+(11, 'qsqdqs', '21Q2439', 'qsdqs@gmail.com', 2, 'aaa', 0, 2),
+(12, 'King_Bradley', '22V2254', 'testeur@gmail.co', 2, 'Testeur2.0', 1, 2),
+(13, 'aaaa', '22V2374', 'russelsonwa1@gmail.com', 2, 'Katon2.0', 0, 2),
+(14, 'Geek', '23D3467', 'geek@geek.com', 1, 'geek123A', 0, 2),
+(15, 'Migos', '22V2329', 'migos@gmail.com', 2, 'M1migosmigos', 0, 2),
+(16, 'All1', '72Q6177', 'igornguegang9@gmail.com', 2, 'Lapero50', 0, 2),
+(17, 'Elsa', '22V2335', 'elsamafang75@gmail.com', 2, '202020Valiente', 0, 2),
+(18, 'Sophie', '21Q2519', 'sophia.mba@yahoo.com', 2, 'Sophia1*', 0, 2),
+(19, 'sdqsdqs', '22A2254', 'russelsonwa2@gmail.com', 2, 'Katon2.0', 0, 2),
+(20, 'kountchou', '22V2278', 'kountchoulea@gmail.com', 2, 'Mecute4life', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -96,7 +108,6 @@ CREATE TABLE `fiche_de_note` (
 --
 
 INSERT INTO `fiche_de_note` (`id`, `src`, `id_ue`, `date_de_publication`) VALUES
-(42, '../uploads/mainProgram1.png', 1, '2023-12-29'),
 (43, '../uploads/ClasseSalaire2.png', 2, '2023-12-29');
 
 -- --------------------------------------------------------
@@ -166,8 +177,11 @@ CREATE TABLE `requette` (
 INSERT INTO `requette` (`id_Requette`, `objet_Requette`, `justificatif_Requette`, `corps_Requette`, `id_Etudiant`, `id_enseignant`, `id_UE`, `status`, `date_soumission`, `raison_rejet`) VALUES
 (8, 'je vous emmerfde', '../uploads/CodePrincipal.png', 'azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', 7, 1, 1, 1, '2023-12-29', NULL),
 (9, 'je veux que tu rejette', '../uploads/CodePrincipal.png', 'xdddddddddddddddddddddddxdxxdxdxdxddxdxxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxd', 7, 1, 1, 1, '2023-12-29', 'Vous etes une merde, c\'est pour ca que j\'ai rejeté'),
-(10, 'abscence de note', '..\\uploads\\CodePrincipal.png', 'kjhfsdkjfhslkdjfsdkgskdgksdlgsdfsdfs\r\n\r\n\r\n\r\nfsdfskldglsdfqskfjsdklglsdjgjsdkglsd\r\nazert-yty\r\n\r\n\r\n\r\nsdfsdgdfffffffffffffffffffffffffffffff', 7, 1, 1, 0, '2023-12-29', NULL),
-(11, 'je vous emmerfde', '..\\uploads\\CodePrincipal.png', 'azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', 7, 1, 1, 1, '2023-12-29', NULL);
+(10, 'abscence de note', '..\\uploads\\CodePrincipal.png', 'kjhfsdkjfhslkdjfsdkgskdgksdlgsdfsdfs\r\n\r\n\r\n\r\nfsdfskldglsdfqskfjsdklglsdjgjsdkglsd\r\nazert-yty\r\n\r\n\r\n\r\nsdfsdgdfffffffffffffffffffffffffffffff', 7, 1, 1, 1, '2023-12-29', NULL),
+(11, 'je vous emmerfde', '..\\uploads\\CodePrincipal.png', 'azzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', 7, 1, 1, 1, '2023-12-29', NULL),
+(18, 'pas de note des exposés', '../uploads/Capture.PNG', '            Monsieur (ou Madame),\r\n\r\n\r\n\r\n        J\'ai l\'honneur de venir très respectueusement auprès de votre haute bienveillance solliciter ...(à completer)\r\n\r\n\r\n\r\n        En effet, je suis étudiant(e) en ICT4D Niveau 2, ...(à completer)\r\n\r\n\r\n\r\n\r\n\r\n        Dans l\'attente d\'une suite favorable, veuillez agréer Monsieur(ou Madame), mes expressions les plus chaleureuses !                                \r\n        ', 12, 7, 7, 1, '2023-12-30', NULL),
+(19, 'pas de note des exposés', '../uploads/Capture.PNG', '            Monsieur (ou Madame),\r\n\r\n\r\n\r\n        J\'ai l\'honneur de venir très respectueusement auprès de votre haute bienveillance solliciter ...(à completer)\r\n\r\n\r\n\r\n        En effet, je suis étudiant(e) en ICT4D Niveau 2, ...(à completer)\r\n\r\n\r\n\r\n\r\n\r\n        Dans l\'attente d\'une suite favorable, veuillez agréer Monsieur(ou Madame), mes expressions les plus chaleureuses !                                \r\n        ', 12, 7, 7, 0, '2023-12-30', NULL),
+(20, 'pas de note des exposés', '../uploads/YDE1.png', '            Monsieur (ou Madame),\r\n\r\n\r\n\r\n        J\'ai l\'honneur de venir très respectueusement auprès de votre haute bienveillance solliciter ...(à completer)\r\n\r\n\r\n\r\n        En effet, je suis étudiant(e) en ICT4D Niveau 2, ...(à completer)\r\n\r\n\r\n\r\n\r\n\r\n        Dans l\'attente d\'une suite favorable, veuillez agréer Monsieur(ou Madame), mes expressions les plus chaleureuses !                                \r\n        ', 12, 7, 7, 0, '2023-12-30', NULL);
 
 -- --------------------------------------------------------
 
@@ -214,7 +228,8 @@ ALTER TABLE `enseignant`
 --
 ALTER TABLE `etudiant`
   ADD PRIMARY KEY (`id_Etudiant`),
-  ADD KEY `FK_Etudiant_id_filiere` (`id_filiere`);
+  ADD KEY `FK_Etudiant_id_filiere` (`id_filiere`),
+  ADD KEY `fk_code_niveau` (`niveau`);
 
 --
 -- Index pour la table `fiche_de_note`
@@ -261,19 +276,19 @@ ALTER TABLE `ue`
 -- AUTO_INCREMENT pour la table `enseignant`
 --
 ALTER TABLE `enseignant`
-  MODIFY `id_enseignant` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_enseignant` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `id_Etudiant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_Etudiant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `fiche_de_note`
 --
 ALTER TABLE `fiche_de_note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT pour la table `filiere`
@@ -291,7 +306,7 @@ ALTER TABLE `niveau`
 -- AUTO_INCREMENT pour la table `requette`
 --
 ALTER TABLE `requette`
-  MODIFY `id_Requette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_Requette` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `ue`
@@ -307,7 +322,7 @@ ALTER TABLE `ue`
 -- Contraintes pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  ADD CONSTRAINT `FK_Etudiant_id_filiere` FOREIGN KEY (`id_filiere`) REFERENCES `filiere` (`id_filiere`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_code_niveau` FOREIGN KEY (`niveau`) REFERENCES `niveau` (`code_niveau`);
 
 --
 -- Contraintes pour la table `fiche_de_note`

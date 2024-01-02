@@ -35,7 +35,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Consultez vos notes</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">tableau de bord</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">tableau de bord</a></li>
                             <li class="breadcrumb-item active">Barbillard</li>
                         </ol>
                     </div>
@@ -54,12 +54,12 @@
                    <div class="container">
                         
                         <div>
-                            <?php 
-                                foreach ($rqs as $rq) {
+                                <?php 
+                                    foreach ($rqs as $rq) {
                                 ?>
 
                                 <form action="" method="post">
-                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a></h5> 
+                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a>  <a href="redaction.php?">Requette</a></h5> 
                                     <div class="text-center">
                                         <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
                                     </div>

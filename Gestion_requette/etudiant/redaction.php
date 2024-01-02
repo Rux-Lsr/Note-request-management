@@ -3,6 +3,16 @@
     session_start();
     if(!isset($_SESSION['user']['matricule_Etudiant']))
         header('Location: ..\error_pages\401.php');
+        require_once "functions_include/connect.php";
+        $sql = "SELECT id_UE, code_UE from ue where code_niveau= :nv";
+        $stm = $con->prepare($sql);
+        $stm->bindValue(":nv", $_SESSION['user']['niveau']);
+        $stm->execute();
+
+        $ues = $stm->fetchAll();
+        //var_dump($ues);
+
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +41,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Redaction de requette</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                             <li class="breadcrumb-item active">rediger</li>
                         </ol>
                         <div class='alert alert-success' style="display: none;" id="alertBox"></div>

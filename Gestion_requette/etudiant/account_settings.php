@@ -32,7 +32,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Parametre de compte</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Mon compte</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Mon compte</a></li>
                             <li class="breadcrumb-item active">Paramettre</li>
                         </ol>
                         <?php 

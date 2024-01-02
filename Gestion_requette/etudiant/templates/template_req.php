@@ -3,15 +3,18 @@
     <div class="form-check d-flex col-md-12">
         <select class="form-select form-control-lg" id="selectlevel"  name="ue" required>
             <option selected disabled value="">UE</option>
-            <option value='7'>ENG203</option>
-            <option value='8'>FRAN203</option>
-            <option value='1'>ICT201</option>
-            <option value='2'>ICT203</option>
-            <option value='3'>ICT205</option>
-            <option value='4'>ICT207</option>
-            <option value='5'>ICT213</option>
-            <option value='9'>ICT215</option>
-            <option value='6'>ICT217</option>                                    
+            <?php 
+                foreach ($ues as $ue) {
+                    echo "<option value={$ue['id_UE']}>{$ue['code_UE']}</option>";
+                }?>   
+             <!-- <option value='8'>FRAN203</option>
+                <option value='1'>ICT201</option>
+                <option value='2'>ICT203</option>
+                <option value='3'>ICT205</option>
+                <option value='4'>ICT207</option>
+                <option value='5'>ICT213</option>
+                <option value='9'>ICT215</option>
+                <option value='6'>ICT217</option>   -->                            
         </select>
     </div>
         <div class="col-md-4"></div>
@@ -26,16 +29,16 @@
     </div>
     <div class="form-check">
         <label for="libelle" class="text-secondary font-weight-bold col-form-label">Corps</label>
-        <textarea class="form-control form-control-lg" id="req" name="libelle" rows="20" placeholder="Corps de la requête" required>
+        <textarea class="form-control form-control-lg" id="req" name="libelle" rows="20" placeholder="Saisissez votre requette au format habituel ici" required>
             Monsieur (ou Madame),
 
 
 
-        J'ai l'honneur de venir très respectueusement auprès de votre haute bienveillance solliciter ...(à completer)
+        J'ai l'honneur de venir très respectueusement auprès de votre haute bienveillance solliciter ...
 
 
 
-        En effet, je suis étudiant(e) en ICT4D Niveau 2, ...(à completer)
+        En effet, je suis étudiant(e) en ICT4D Niveau <?=$_SESSION['user']['niveau']?>, ...
 
 
 

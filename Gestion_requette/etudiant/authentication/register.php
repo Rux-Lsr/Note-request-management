@@ -79,18 +79,18 @@
         <?php 
             if(isset($_POST["submit_button"])){
                 
-                if(!empty($_POST["user_name"]) && !empty($_POST["matricule"]) && !empty($_POST["mail"])&& !empty($_POST["mdp"])){
+                if(!empty($_POST["user_name"]) && !empty($_POST["matricule"]) && !empty($_POST["mail"])&& !empty($_POST["mdp"]) && !empty($_POST["niveau"] && !empty($_POST["filiere"]))){
                     //require_once "functions_include/connect.php";
                     include_once "../functions_include/inscription.php";
                     $nom = htmlspecialchars($_POST['user_name']);
                     $matricule = htmlspecialchars($_POST['matricule']);
                     $mail=htmlspecialchars($_POST['mail']);
                     $mdp=htmlspecialchars($_POST['mdp']);
-
-                    insertInto("etudiant", $nom,$matricule, $mail, $mdp, $_POST["filiere"]);
-
+                    $nv=htmlspecialchars($_POST['niveau']);
+                    insertInto("etudiant", $nom,$matricule, $mail, $mdp, $_POST["filiere"], $nv);
+                }else {
+                    echo"<div alert alert-danger>Veuillez remplir tous les champs convenablement</div>";
                 }
-                    
             }
         ?>
         <div id="layoutAuthentication">
@@ -124,8 +124,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre majuscule, une lettre minuscule, et au moins 8 caractères ou plus"
-required/>                                          
+                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Creez votre mot passe" name="mdp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une lettre majuscule, une lettre minuscule, et au moins 8 caractères ou plus" required/>                                          
                                                     <label for="inputPassword">Mot de passe</label>
                                                     </div>
                                                 </div>
@@ -137,15 +136,24 @@ required/>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <select id="mon-select" class="selectpicker" data-live-search="true" name="filiere">
-                                                <option value="1">ICT4D</option>
-                                                <option value="2" disabled>INFO(comming soon)</option>
-                                            </select>
-                                            <!-- <select id="mon-select" class="selectpicker" data-live-search="true" name="niveau">
-                                                <option value="1">1</option>
-                                                <option value="2" >2</option>
-                                                <option value="3" >3</option>
-                                            </select> -->
+                                            <div style="display: flex;">
+                                                
+                                                <div><label for="filere">Filere</label>
+                                                    <select id="mon-select" class="form-select"  name="filiere" aria-required>
+                                                        <option value="1">ICT4D</option>
+                                                        <option value="2" disabled>INFO(comming soon)</option>
+                                                    </select>
+                                                </div>
+                                                <div style="margin-left: 5px;">
+                                                    <label for="niveau">Niveau</label>
+                                                    <select id="mon-select" class="form-select"  name="niveau" aria-required>
+                                                        
+                                                        <option value="1">1</option>
+                                                        <option value="2" >2</option>
+                                                        <option value="3" >3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
                                                     <!-- <button name="submit_button"  id="submitButton" class="btn btn-primary btn-block" href="login.php">Creer le compte</button> -->
