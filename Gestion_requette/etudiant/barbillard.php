@@ -44,7 +44,7 @@
                         require_once 'functions_include\connect.php';
                         $rqs =null;
                         
-                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue group by code_UE";
+                        $sql = "SELECT f.id, src, code_UE, date_de_publication, f.id_ue from fiche_de_note f , ue where ue.id_UE = f.id_ue and ue.code_niveau={$_SESSION['user']['niveau']} group by code_UE";
                         $stm = $con->prepare($sql);
                         $stm->execute();
 
@@ -59,7 +59,7 @@
                                 ?>
 
                                 <form action="" method="post">
-                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a>  <a href="redaction.php?">Requette</a></h5> 
+                                    <h5>#<?=$rq["code_UE"]?> - posté le : <?=$rq["date_de_publication"]?> | <a href="<?=$rq['src']?>" target="_blank" class="btn btn-primary">Visualiser</a>  <a href="redaction.php" class="btn btn-success">Requette</a></h5> 
                                     <div class="text-center">
                                         <img src="<?=$rq['src']?>" class="img-fluid " alt="lol">
                                     </div>

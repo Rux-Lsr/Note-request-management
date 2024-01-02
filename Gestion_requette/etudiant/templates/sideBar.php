@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
+            <div class="small">Connecté en tant que:</div>
             <?php 
             if (isset($_SESSION['user'])){
                 echo $_SESSION['user']['nom'];
