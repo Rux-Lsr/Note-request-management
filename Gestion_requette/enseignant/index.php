@@ -85,6 +85,9 @@
                                             $i++;
                                                }
                                             }
+                                            if ($countnbrequettenontraite["count(*)"] == 0) {
+                                                echo"<tr><td colspan='6'>Pas de requette en attente<td></tr>";
+                                            }
                                         ?>
                                     </tbody>
                                 </table>
@@ -129,6 +132,9 @@
                                         <?php
                                             $i++;
                                                }
+                                               if ($countnbrequettenontraite["count(*)"] == 0) {
+                                            echo"<tr><td colspan='6'>Pas de requette traitée<td></tr>";
+                                            }
                                             }
                                         ?>
                                     </tbody>

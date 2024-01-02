@@ -6,8 +6,11 @@
     require_once 'functions_include/those.php';
     $stm = $con->prepare("SELECT ue.code_UE, r.objet_Requette, e.nom_enseignant, r.status, r.date_soumission, id_Requette, r.id_UE, justificatif_Requette from requette r JOIN ue on ue.id_UE = r.id_UE join enseignant e on e.id_enseignant = r.id_enseignant where r.id_Etudiant = :id_");
     $stm->execute(array('id_'=>$_SESSION['user']['id_Etudiant']));
-
     $rqs = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+    $stm = $con->prepare("SELECT count(*) from requette r where r.id_Etudiant = :id_");
+    $stm->execute(array('id_'=>$_SESSION['user']['id_Etudiant']));
+    $count = $stm->fetch(PDO::FETCH_ASSOC)['count(*)'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +42,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Status des requettes
+                                Status des requettes (<?=$count?>)
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped table-bordered">
@@ -94,6 +97,7 @@
                                                 window.preventDefault();
                                         }
                                         </script>
+                                        
                                     </tbody>
                                 </table>
                             </div>

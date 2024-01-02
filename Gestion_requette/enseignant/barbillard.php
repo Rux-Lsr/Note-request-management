@@ -168,15 +168,15 @@
                         </div>
                         <script>
                             function confirmDelete(){
-                                    let reponse = confirm("Voulez vous vraiment supprimer ce post?");
-                                    console.log("Reponse: "+reponse);
-                                    
-                                    let xhr = new XMLHttpRequest();
-                                    xhr.open("POST", "functions_include/delete_post.php", true);
-                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                    let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
-                                    xhr.send(params);
-                                    window.location.href = window.location.href;
+                                let reponse = confirm("Voulez vous vraiment supprimer ce post?");
+                                console.log("Reponse: "+reponse);
+                                
+                                let xhr = new XMLHttpRequest();
+                                xhr.open("POST", "functions_include/delete_post.php", true);
+                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                let params = "reponse="+reponse+"&id="+document.getElementById('id_').value
+                                xhr.send(params);
+                                window.location.href = window.location.href;
                                     
                             }
                         </script>

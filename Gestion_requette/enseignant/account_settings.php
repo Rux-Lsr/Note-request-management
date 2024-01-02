@@ -100,7 +100,6 @@
                                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                                     let params = "reponse="+reponse
                                     xhr.send(params);
-                                    
                                 }
                             </script>
                         </div>
