@@ -28,7 +28,7 @@
                             <div class="collapse" id="collapseInsertion" aria-labelledby="headingOne" data-bs-parent="#collapseLayouts">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="insert.php">Insertion</a>
-                                    <a class="nav-link" href="#">Consultation</a>
+                                    <a class="nav-link" href="consulter.php">Consultation</a>
                                 </nav>
                             </div>
                             <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEdition" aria-expanded="false" aria-controls="collapseEdition">

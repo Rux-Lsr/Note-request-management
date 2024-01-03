@@ -38,12 +38,13 @@
                     </ol>
                 </div>
                <?php
-               if(isset($_POST['sub2'])){
-                if(!empty($_POST["libelle"]) && !empty($_POST["code"]) && !empty($_POST["niveau"]) && !empty($_POST["filiere"]))
-                    insert_UE($_POST['libelle'], $_POST["code"], $_POST["niveau"], $_POST["filiere"]); 
-            }else if(isset($_POST["sub1"])){
-                insert_Enseignant($_POST['nom_ens'], $_POST["mail"], $_POST['pswd'], $_POST['ue']);
-            }?>
+                if(isset($_POST['sub2'])){
+                    if(!empty($_POST["libelle"]) && !empty($_POST["code"]) && !empty($_POST["niveau"]) && !empty($_POST["filiere"]))
+                        insert_UE($_POST['libelle'], $_POST["code"], $_POST["niveau"], $_POST["filiere"]); 
+                }else if(isset($_POST["sub1"])){
+                    insert_Enseignant($_POST['nom_ens'], $_POST["mail"], $_POST['pswd'], $_POST['ue']);
+                }
+                ?>
                 <div class="container">
                     <div class="row w-100" >
                         <div class="col-lg-5 w-100">
