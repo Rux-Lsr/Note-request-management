@@ -131,7 +131,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirmer me mot de passe" name="mdp_confirm" oninput="verifierMdp();" required/>
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
+                                                        <label for="inputPasswordConfirm">Password</label>
                                                         <div id="msg"></div>
                                                     </div>
                                                 </div>
@@ -147,7 +147,6 @@
                                                 <div style="margin-left: 5px;">
                                                     <label for="niveau">Niveau</label>
                                                     <select id="mon-select" class="form-select"  name="niveau" aria-required>
-                                                        
                                                         <option value="1">1</option>
                                                         <option value="2" >2</option>
                                                         <option value="3" >3</option>
