@@ -141,7 +141,7 @@ required/>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirmer me mot de passe" name="mdp_confirm" oninput="verifierMdp();" required/>
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
+                                                        <label for="inputPasswordConfirm">Confirmer le mot de passe</label>
                                                         <div id="msg"></div>
                                                     </div>
                                                 </div>

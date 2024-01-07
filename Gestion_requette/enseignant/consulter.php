@@ -6,11 +6,9 @@
     require_once 'functions_include/those.php';
     require_once 'functions_include/admin_adding.php';
     //recuperation des UE
-   
     $stm = $con->prepare($sql = "SELECT id_UE, code_UE, libelle_UE, ue.code_niveau, code_filiere from ue Join niveau nv on nv.code_niveau = ue.code_niveau JOIN filiere f on f.id_filiere=ue.id_filiere");
     $stm->execute();
     $rqs = $stm->fetchAll();
-
     //recuperation de enseignants
     $stm = $con->prepare("SELECT e.id_enseignant, nom_enseignant, email_enseignant, code_UE   from enseignant e join ue on e.id_enseignant=ue.id_enseignant");
     $stm->execute();
@@ -28,7 +26,6 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        
     </head>
     <body class="sb-nav-fixed">
     <?php include_once "templates/fixedNavBar.php";?>
@@ -39,10 +36,9 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Administrateur</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Insertion</li>
+                        <li class="breadcrumb-item active">Consultation</li>
                     </ol>
                 </div>
-              
                 <div class="container">
                 <div class="card mb-4">
                             <div class="card-header">
@@ -61,12 +57,10 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    
                                     <tbody>
                                         <?php 
                                             $i = 1;
-                                            foreach ($rqs as $rq) { 
-                                              
+                                            foreach ($rqs as $rq) {      
                                         ?>
                                             <form action="" method="get">
                                                 <tr>
@@ -75,15 +69,13 @@
                                                     <td><?=$rq['code_UE']?></td>
                                                     <td><?=$rq['code_filiere']?></td>
                                                     <td><?=$rq['code_niveau']?></td>
-                                                    <td><a href="#" class="btn btn-success">Editer</a></td>
+                                                    <td><a href="modif-UE.php?code_ue=<?=$rq['id_UE']?>" class="btn btn-success">Editer</a></td>
                                                 </tr>
                                                 <input type="hidden" id='id_' value="<?=$rq['id_UE']?>" readonly>
                                             </form>  
                                         <?php
-                                            $i++;
-                                               
+                                            $i++;  
                                             }
-                                           
                                         ?>
                                     </tbody>
                                 </table>
@@ -110,8 +102,7 @@
                                     <tbody>
                                         <?php 
                                             $i = 1;
-                                            foreach ($reqs as $rq) { 
-                                              
+                                            foreach ($reqs as $rq) {    
                                         ?>
                                             <form action="" method="get">
                                                 <tr>
@@ -119,8 +110,7 @@
                                                     <td><?=$rq['nom_enseignant']?></td>
                                                     <td><?=$rq['email_enseignant']?></td>
                                                     <td><?=$rq['code_UE']?></td>
-                                                    <td><a href="#" class="btn btn-success">Editer</a></td>
-                                                   
+                                                    <td><a href="" class="btn btn-success">Editer</a></td>
                                                 </tr>
                                                 <input type="hidden" id='id_' value="<?=$rq['id_enseignant']?>" readonly>
                                             </form>  

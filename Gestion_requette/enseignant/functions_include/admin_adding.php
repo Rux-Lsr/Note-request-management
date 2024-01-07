@@ -8,18 +8,18 @@ function insert_UE($libelle, $code, $nv, $filiere){
     $filiere = htmlspecialchars($filiere);
 
     // Vérifier si l'UE existe déjà
-    $check = $con->prepare("SELECT * FROM ue WHERE code_UE = :code");
-    $check->bindValue(':code', $code);
+    $check = $con->prepare("SELECT * FROM ue WHERE code_UE = :code_");
+    $check->bindValue(':code_', $code);
     $check->execute();
     if($check->rowCount() > 0){
         echo "<div class='alert alert-warning'>L'UE existe déjà</div>";
         return;
     }
 
-    $sql = "INSERT into ue(libelle_UE, code_UE, id_filiere, code_niveau) values (:lib, :code, :filiere, :nv)";
+    $sql = "INSERT into ue(libelle_UE, code_UE, id_filiere, code_niveau) values (:lib, :code_, :filiere, :nv)";
     $stm = $con->prepare($sql);
     $stm->bindValue(':lib', $lib);
-    $stm->bindValue(':code', $code);
+    $stm->bindValue(':code_', $code);
     $stm->bindValue(':filiere', $filiere);
     $stm->bindValue(':nv', $nv);
     $re = $stm->execute();
