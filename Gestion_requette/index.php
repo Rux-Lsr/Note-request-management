@@ -23,7 +23,26 @@
         .navbar-custom:hover .navbar-nav:hover .nav-link:hover{
             color:black;
         }
-
+        /* Ajout d'un style pour le rectangle arrondi */
+        .rounded-rectangle {
+            border-radius: 25px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+        /* Ajout d'un style pour le bouton de confirmation */
+        .confirm-button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -44,20 +63,25 @@
         </div>
     </nav>
     <div class="container">
-        <h1 class="text-center mt-5">Bienvenue sur notre site</h1>
+        <!-- Modification du titre et du contenu de la page -->
+        <div class="rounded-rectangle">
+            <h1>Bienvenue sur notre application de requête</h1>
+            <p>Connectez-vous en tant que</p>
+        </div>
         <div class="row mt-5">
             <div class="col text-center">
-                <a href="enseignant/authentication/login.php" class="btn btn-primary">Enseignant</a>
+                <!-- Modification du style des boutons -->
+                <a href="enseignant/authentication/login.php" class="confirm-button">Enseignant</a>
             </div>
             <div class="col text-center">
-                <a href="etudiant/authentication/login.php" class="btn btn-secondary">Etudiant</a>
+                <a href="etudiant/authentication/login.php" class="confirm-button">Etudiant</a>
             </div>
         </div>
     </div>
     <footer class="py-4 bg-light mt-auto footer">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; ICT4D academic project 2023</div>
+            <div class="text-muted">Copyright © ICT4D academic project 2023</div>
         </div>
     </div>
 </footer>

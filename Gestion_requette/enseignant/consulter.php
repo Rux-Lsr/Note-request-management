@@ -125,9 +125,7 @@
                                                 <input type="hidden" id='id_' value="<?=$rq['id_enseignant']?>" readonly>
                                             </form>  
                                         <?php
-                                            $i++;
-                                               
-                                               
+                                            $i++;  
                                             }
                                         ?>
                                     </tbody>

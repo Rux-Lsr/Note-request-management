@@ -139,14 +139,14 @@
                                             <div style="display: flex;">
                                                 
                                                 <div><label for="filere">Filere</label>
-                                                    <select id="mon-select" class="form-select"  name="filiere" aria-required>
+                                                    <select id="mon-select" class="form-select"  name="filiere" required>
                                                         <option value="ICT4D">ICT4D</option>
                                                         <option value="INFO" disabled>INFO(comming soon)</option>
                                                     </select>
                                                 </div>
                                                 <div style="margin-left: 5px;">
                                                     <label for="niveau">Niveau</label>
-                                                    <select id="mon-select" class="form-select"  name="niveau" aria-required>
+                                                    <select id="mon-select" class="form-select"  name="niveau" required>
                                                         <option value="1">1</option>
                                                         <option value="2" >2</option>
                                                         <option value="3" >3</option>
