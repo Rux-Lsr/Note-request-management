@@ -6,10 +6,11 @@
     require_once 'functions_include/those.php';
     require_once 'functions_include/admin_adding.php';
     //recuperation des UE
-    $sql = "SELECT code_UE, id_UE from ue where id_enseignant is null";
+    $sql = "SELECT nom_enseignant, email_enseignant from enseignant where id_enseignant=:id_";
     $stm = $con->prepare($sql);
+    $stm->bindValue(":id_", $_GET['id']);
     $stm->execute();
-    $ues = $stm->fetchAll();
+    $ens = $stm->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -38,11 +39,17 @@
                     </ol>
                 </div>
                <?php
-                if(isset($_POST['sub2'])){
-                    if(!empty($_POST["libelle"]) && !empty($_POST["code"]) && !empty($_POST["niveau"]) && !empty($_POST["filiere"]))
-                        insert_UE($_POST['libelle'], $_POST["code"], $_POST["niveau"], $_POST["filiere"]); 
-                }else if(isset($_POST["sub1"])){
-                    insert_Enseignant($_POST['nom_ens'], $_POST["mail"], $_POST['pswd'], $_POST['ue']);
+                if(isset($_POST['sub1'])){
+                    $sql = "UPDATE enseignant set mdp=:pswd where id_enseignant=:id_";
+                    $stm = $con->prepare($sql);
+                    $stm->bindValue(":id_", $_GET['id']);
+                    $stm->bindValue(":pswd", $_POST['pswd']);
+                    $res=$stm->execute();
+                    if($res == true){
+                        echo "<div class='alert alert-success' role='alert'>Mot de passe réinitialisé avec success</div>";
+                    }else{
+                        echo "<div class='alert alert-danger' role='alert'>Echec de reinitialisation de mot de passe</div>";
+                    }
                 }
                 ?>
                 <div class="container">
@@ -65,25 +72,32 @@
                                                     <!-- Formulaire Enseignant -->
                                                     <form action="" method="post">
                                                         <div class="form-floating mb-3">
-                                                            <input class="form-control" id="inputName" type="text" placeholder="Nom" required name="nom_ens"/>
+                                                            <input class="form-control" id="inputName" type="text" placeholder="Nom"  name="nom_ens" value="<?=$ens['nom_enseignant']?>" disabled/>
                                                             <label for="nom">Nom</label>
                                                         </div>
                                                         <div class="form-floating mb-3">
-                                                            <input class="form-control" id="inputMail" type="email" placeholder="email" required name="mail"/>
+                                                            <input class="form-control" id="inputMail" type="email" placeholder="email"  name="mail" value="<?=$ens['email_enseignant']?>" disabled/>
                                                             <label for="inputMail">Email address</label>
                                                         </div>
                                                         <div class="form-floating mb-3">
-                                                            <select class="form-control" name="ue">
-                                                                <option selected disabled value="">UE</option>
-                                                                <?php 
-                                                                    foreach($ues as $ue){
-                                                                        echo "<option value=\"{$ue['id_UE']}\">".$ue['code_UE']."</option>";
-                                                                    }
-                                                                ?>
-                                                            </select >
+                                                            <input class="form-control" id="inputPassword" type="text" placeholder="Password" required name="pswd" readonly/>
+                                                            <label for="inputPassword">Password</label><br>
+                                                            <button class="btn btn-primary" type ='button' id="generate">Generer</button>
                                                         </div>
+                                                        <script>
+                                                            document.getElementById('generate').addEventListener('click', function() {
+                                                                var length = 8,
+                                                                    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#\"',;:!§/.?%µù*£¨^$=+",
+                                                                    retVal = "";
+                                                                for (var i = 0, n = charset.length; i < length; ++i) {
+                                                                    retVal += charset.charAt(Math.floor(Math.random() * n));
+                                                                }
+                                                                document.getElementById('inputPassword').value = retVal;
+                                                            });
+                                                        </script>
+                                                       
                                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                            <button class="btn btn-primary" name="sub1" type="submit">Ajouter</button>
+                                                            <button class="btn btn-primary" name="sub1" type="submit">Enregistrer</button>
                                                         </div>
                                                     </form>
                                                 </div>

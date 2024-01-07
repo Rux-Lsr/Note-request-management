@@ -72,7 +72,7 @@
                         if(this.response == "ok"){
                             document.getElementById("alertBox").innerText = "Votre requette a été soumise avec success";
                             document.getElementById("alertBox").style.display = "block";
-                            location.href = "index.php";
+                            location.onload();
                         }else{
                             document.getElementById("alertBaxDanger").innerText = this.response;
                             document.getElementById("alertBaxDanger").style.display = "block";

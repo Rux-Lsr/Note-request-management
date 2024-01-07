@@ -110,7 +110,7 @@
                                                     <td><?=$rq['nom_enseignant']?></td>
                                                     <td><?=$rq['email_enseignant']?></td>
                                                     <td><?=$rq['code_UE']?></td>
-                                                    <td><a href="" class="btn btn-success">Editer</a></td>
+                                                    <td><a href="modif-ens.php?id=<?=$rq['id_enseignant']?>" class="btn btn-success">Editer</a></td>
                                                 </tr>
                                                 <input type="hidden" id='id_' value="<?=$rq['id_enseignant']?>" readonly>
                                             </form>  
