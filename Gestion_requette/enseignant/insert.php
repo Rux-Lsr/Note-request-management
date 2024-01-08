@@ -42,7 +42,9 @@
                     if(!empty($_POST["libelle"]) && !empty($_POST["code"]) && !empty($_POST["niveau"]) && !empty($_POST["filiere"]))
                         insert_UE($_POST['libelle'], $_POST["code"], $_POST["niveau"], $_POST["filiere"]); 
                 }else if(isset($_POST["sub1"])){
-                    insert_Enseignant($_POST['nom_ens'], $_POST["mail"], $_POST['pswd'], $_POST['ue']);
+                    if(!isset($_POST['ue']))
+                    $ue = -1;
+                    insert_Enseignant($_POST['nom_ens'], $_POST["mail"], $_POST['pswd'], $ue);
                 }
                 ?>
                 <div class="container">
@@ -90,7 +92,7 @@
                                                         </script>
                                                         <div class="form-floating mb-3">
                                                             <select class="form-control" name="ue">
-                                                                <option selected disabled value="">UE</option>
+                                                                <option disabled value="">UE</option>
                                                                 <?php 
                                                                     foreach($ues as $ue){
                                                                         echo "<option value=\"{$ue['id_UE']}\">".$ue['code_UE']."</option>";

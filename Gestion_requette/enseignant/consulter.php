@@ -24,8 +24,11 @@
         <meta name="author" content="" />
         <title>Dashboard ens - Gestion de requette</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
     </head>
     <body class="sb-nav-fixed">
     <?php include_once "templates/fixedNavBar.php";?>
@@ -39,7 +42,11 @@
                         <li class="breadcrumb-item active">Consultation</li>
                     </ol>
                 </div>
+                
+                        <div class="alert alert-success" id="t"style="display: none;">Suppression effectuée avec success</div>
+                        <div class="alert alert-warning" id='m'style="display: none;">Echec de la suppression de l'unite d'enseignement</div>
                 <div class="container">
+                <h3>Unité d'enseignements</h3>
                 <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -54,11 +61,11 @@
                                             <th>Code ue</th>
                                             <th>filiere</th>
                                             <th>niveau</th>
-                                            <th>Action</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                    <?php 
                                             $i = 1;
                                             foreach ($rqs as $rq) {      
                                         ?>
@@ -77,11 +84,16 @@
                                             $i++;  
                                             }
                                         ?>
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <hr>
+                        <div class="alert alert-success" id="n" style="display: none;">Suppression effectuée avec success</div>
+                        <div class="alert alert-warning" id="p" style="display: none;">Echec de la suppression de l'enseignant</div>
+                        <h3>Enseignant</h3>
+                        
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -95,29 +107,39 @@
                                             <th>Nom</th>
                                             <th>E-mail</th>
                                             <th>UE</th>
-                                            <th>...</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <?php 
+                                    <?php 
                                             $i = 1;
                                             foreach ($reqs as $rq) {    
                                         ?>
-                                            <form action="" method="get">
-                                                <tr>
+                                            <form action="" method="get" >
+                                                <tr id="row_<?=$rq['id_enseignant']?>">
                                                     <td><?=$i?></td>
                                                     <td><?=$rq['nom_enseignant']?></td>
                                                     <td><?=$rq['email_enseignant']?></td>
                                                     <td><?=$rq['code_UE']?></td>
-                                                    <td><a href="modif-ens.php?id=<?=$rq['id_enseignant']?>" class="btn btn-success">Editer</a></td>
+                                                    <td><a href="modif-ens.php?id=<?=$rq['id_enseignant']?>" class="btn btn-success">Editer</a> </td>
                                                 </tr>
-                                                <input type="hidden" id='id_' value="<?=$rq['id_enseignant']?>" readonly>
+                                                
                                             </form>  
                                         <?php
                                             $i++;  
                                             }
                                         ?>
+                                        <script>
+                                            function deleteRow(nom_enseignant, id_enseignant){
+                                                let reponse = confirm("Confirmer la suppresion  de l'enseignant "+ nom_enseignant);
+                                                let xhr = new XMLHttpRequest();
+                                                xhr.open("POST", "functions_include/delete_ue.php", true);
+                                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                                let params = "reponse="+reponse+"&id="+id_enseignant
+                                                xhr.send(params);
+                                            }
+                                        </script>
                                     </tbody>
                                 </table>
                             </div>
